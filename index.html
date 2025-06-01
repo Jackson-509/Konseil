@@ -1,0 +1,435 @@
+<!-- Le contenu complet avec toutes les sections -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabinet Conseil - Réservation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      color: #004466;
+      padding: 10px 30px;
+    }
+    .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+    .menu-toggle-wrapper {
+  display: none;
+}
+
+.menu-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #004466;
+  padding: 10px;
+}
+    nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+    nav a {
+      color: #000000;
+      text-decoration: none;
+    }
+    .tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+    .tile {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .tile img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    .tile h3 {
+      color: #4A148C;
+      margin-bottom: 10px;
+    }
+    .tile ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .tile ul li::before {
+      content: "✔";
+      margin-right: 8px;
+      color: #4A148C;
+    }
+    .tile button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #FBC02D;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+    .tile button:hover {
+      background-color: #f9a825;
+    }
+    .social-banner {
+      background-color: #f0f0f0;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-icons a {
+      background-color: #1f2d4a;
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 9999;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .desktop-nav.active {
+    display: flex;
+  }
+  nav ul {
+    align-items: flex-start !important;
+    text-align: left;
+  }
+  #nav-menu {
+    align-items: flex-start;
+  }
+  .tiles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tiles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .menu-toggle-wrapper {
+    display: block;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 9999;
+  }
+  nav ul.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .tiles {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .tiles {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .blog-carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+    }
+    .blog-carousel article {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+    }
+    .blog-carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+    .blog-carousel::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+    .blog-carousel::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    #reservation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+<img src="C:\Users\arist\Documents\Cabinet-Konseil\Logo_entreprise\KAZ_Logo.png" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
+      <div class="menu-toggle-wrapper"><button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div><!-- fin bouton menu-toggle-wrapper -->
+      <nav>
+  <ul id="nav-menu" class="desktop-nav">
+          <li><a href="#accueil" class="animate__animated animate__flipInX">Accueil</a></li>
+          <li><a href="#services" class="animate__animated animate__flipInX">Services</a></li>
+          <li><a href="#reservation" class="animate__animated animate__flipInX">Réserver</a></li>
+          <li><a href="#contact" class="animate__animated animate__flipInX">Contact</a></li>
+          <li><a href="#blog" class="animate__animated animate__flipInX">Blog</a></li>
+          <li><a href="#join" class="animate__animated animate__flipInX">Nous Rejoindre</a></li>
+          <li style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+  <a href="#contact" class="animate__animated animate__flipInX" style="background-color: #c0392b; color: white; padding: 10px 15px; border-radius: 4px; font-weight: bold; display: inline-block;">Contactez-nous</a>
+  <a href="#login" class="animate__animated animate__flipInX" style="border: 2px solid #1f2d4a; padding: 10px 15px; border-radius: 4px; font-weight: bold; color: #1f2d4a; display: inline-block;">Mon Espace</a>
+</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil" style="margin: 0; padding: 120px 20px 60px 20px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1600x600') center/cover no-repeat; color: white;">
+  <h2 class="animate__animated animate__fadeInDown">Développez. Innovez. Performez.</h2>
+  <p class="animate__animated animate__fadeInDown animate__delay-1s">Conseil stratégique, digital et data en Guadeloupe.</p>
+</section>
+
+    <section id="services">
+  <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #004466;">Nos Services</h2>
+  <div class="tiles">
+    <div class="tile" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+      <img src="C:\Users\arist\Documents\Cabinet-Konseil\Nos_services\pexels-kampus-8441790.jpg" alt="Conseil financier">
+      <h3>Conseil Financier & Investissements</h3>
+      <ul>
+        <li>Optimisation financière</li>
+        <li>Recherche de financements</li>
+        <li>Gestion de trésorerie</li>
+        <li>Accompagnement stratégique</li>
+      </ul>
+      <button>En savoir plus</button>
+    </div>
+    <div class="tile">
+      <img src="C:\Users\arist\Documents\Cabinet-Konseil\Nos_services\pexels-cottonbro-5082581.jpg" alt="Création digitale">
+      <h3>Création de site & application mobile</h3>
+      <ul>
+        <li>Sites vitrines & e-commerce</li>
+        <li>Applications Android/iOS</li>
+        <li>Design UX/UI</li>
+        <li>Maintenance & évolution</li>
+      </ul>
+      <button>En savoir plus</button>
+    </div>
+    <div class="tile">
+      <img src="C:\Users\arist\Documents\Cabinet-Konseil\Nos_services\istockphoto-1194668023-2048x2048.jpg" alt="Étude de marché">
+      <h3>Études de Marché</h3>
+      <ul>
+        <li>Analyse concurrentielle</li>
+        <li>Enquêtes terrain & sondages</li>
+        <li>Tendances & comportement client</li>
+        <li>Rapport stratégique</li>
+      </ul>
+      <button>En savoir plus</button>
+    </div>
+    <div class="tile">
+      <img src="C:\Users\arist\Documents\Cabinet-Konseil\Nos_services\pexels-sora-shimazaki-5926395.jpg" alt="Data Analytics">
+      <h3>Analyse Statistique & Data</h3>
+      <ul>
+        <li>Reporting sur-mesure</li>
+        <li>Analyse de performance</li>
+        <li>Data Visualisation</li>
+        <li>Recommandations stratégiques</li>
+      </ul>
+      <button>En savoir plus</button>
+    </div>
+  </div>
+</section>
+
+    <section id="reservation" style="position: relative; background: url('Bannieres_site/frank-huang-WxQdHLGT7s8-unsplash.jpg') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh; overflow: hidden;">
+      <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem; color: #ffffff; font-weight: 900; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">Réservez une prestation</h2>
+      <form id="booking-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 2;">
+        <label for="lastname">Nom</label>
+        <input style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" type="text" id="lastname" name="lastname" required>
+        <label for="firstname">Prénom</label>
+        <input style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" type="text" id="firstname" name="firstname" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="service">Service</label>
+        <select style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" id="service" name="service">
+          <option value="audit">Audit stratégique</option>
+          <option value="formation">Formation</option>
+          <option value="data">Data Analytics</option>
+        </select>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Heure</label>
+        <input type="time" id="time" name="time" required>
+        <button type="submit" style="padding: 12px; background-color: #004466; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease;">Réserver</button>
+      </form>
+    </section>
+
+    <section id="blog" style="margin: 60px 20px;">
+      <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
+      <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
+      <div class="tiles" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="tile" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+    <img src="https://via.placeholder.com/300x180" alt="Article 1" style="width: 100%; height: auto;">
+    <h4>7 outils indispensables pour un Data Analyst</h4>
+    <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
+  </div>
+  <div class="tile">
+    <img src="https://via.placeholder.com/300x180" alt="Article 2" style="width: 100%; height: auto;">
+    <h4>Devstral, le LLM de Mistral dédié au développement d’agent IA</h4>
+    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+  </div>
+  <div class="tile">
+    <img src="https://via.placeholder.com/300x180" alt="Article 3" style="width: 100%; height: auto;">
+    <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
+    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+  </div>
+</div>
+    </section>
+
+    <section id="contact" style="padding: 0 20px;">
+      <h2>Contact</h2>
+      <p>Email : contact@cabinetconseil.fr</p>
+      <p>Téléphone : +590 690 00 00 00</p>
+    </section>
+
+    <section class="social-banner">
+      <h2>Nos réseaux</h2>
+      <div class="social-icons">
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Cabinet Conseil - Tous droits réservés.</p>
+  </footer>
+
+  <script>
+  function toggleMenu() {
+  const navMenu = document.getElementById('nav-menu');
+  if (navMenu.classList.contains('active')) {
+    navMenu.classList.remove('active');
+    navMenu.style.display = 'none';
+  } else {
+    navMenu.classList.add('active');
+    navMenu.style.display = 'flex';
+  }
+}
+
+  document.addEventListener('click', function(event) {
+  const navMenu = document.getElementById('nav-menu');
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (
+    navMenu.classList.contains('active') &&
+    !navMenu.contains(event.target) &&
+    !menuToggle.contains(event.target)
+  ) {
+    navMenu.classList.remove('active');
+    navMenu.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
