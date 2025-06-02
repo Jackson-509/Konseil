@@ -258,12 +258,25 @@
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
   }
+  @media (max-width: 768px) {
+    #blog .tiles {
+      display: flex !important;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+    #blog .tile {
+      flex: 0 0 80%;
+      scroll-snap-align: start;
+      margin-right: 15px;
+    }
+  }
 </style>
 </head>
 <body>
   <header>
     <div class="header-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-<img src="Logo_entreprise\KAZ_Logo.png" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
+<img src="C:\Users\arist\Documents\Cabinet-Konseil\Logo_entreprise\KAZ_Logo.png" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
       <div class="menu-toggle-wrapper"><button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div><!-- fin bouton menu-toggle-wrapper -->
       <nav>
   <ul id="nav-menu" class="desktop-nav">
@@ -362,26 +375,26 @@
     </section>
 
     <section id="blog" style="margin: 60px 20px;">
-      <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
-      <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
-      <div class="tiles" style="grid-template-columns: repeat(3, 1fr);">
-  <div class="tile" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-    <img src="https://via.placeholder.com/300x180" alt="Article 1" style="width: 100%; height: auto;">
-    <h4>7 outils indispensables pour un Data Analyst</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
+  <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
+  <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
+  <div class="tiles blog-carousel">
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 1" style="width: 100%; height: auto;">
+      <h4>7 outils indispensables pour un Data Analyst</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
+    </div>
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 2" style="width: 100%; height: auto;">
+      <h4>Devstral, le LLM de Mistral dédié au développement d’agent IA</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+    </div>
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 3" style="width: 100%; height: auto;">
+      <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+    </div>
   </div>
-  <div class="tile">
-    <img src="https://via.placeholder.com/300x180" alt="Article 2" style="width: 100%; height: auto;">
-    <h4>Devstral, le LLM de Mistral dédié au développement d’agent IA</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-  </div>
-  <div class="tile">
-    <img src="https://via.placeholder.com/300x180" alt="Article 3" style="width: 100%; height: auto;">
-    <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-  </div>
-</div>
-    </section>
+</section>
 
     <section id="contact" style="padding: 0 20px;">
       <h2>Contact</h2>
