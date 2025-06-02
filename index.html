@@ -8,211 +8,248 @@
   <title>Cabinet Conseil - Réservation</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
- <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      color: #004466;
+      padding: 10px 30px;
+    }
+    .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+    .menu-toggle-wrapper {
+  display: none;
+}
 
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #ffffff;
-  }
-
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px 30px;
-  }
-
-  .header-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  nav a {
-    color: #000000;
-    text-decoration: none;
-  }
-
-  nav a:hover {
-    text-decoration: none;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
-
-  .menu-toggle-wrapper {
+.menu-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #004466;
+  padding: 10px;
+}
+    nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+    nav a {
+      color: #000000;
+      text-decoration: none;
+    }
+    .tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+    .tile {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .tile img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    .tile h3 {
+      color: #4A148C;
+      margin-bottom: 10px;
+    }
+    .tile ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .tile ul li::before {
+      content: "✔";
+      margin-right: 8px;
+      color: #4A148C;
+    }
+    .tile button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #295CFF; /* Bleu comme dans ton image */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.tile button:hover {
+  background-color: #1a46d9; /* variante plus foncée au survol */
+}
+    .social-banner {
+      background-color: #f0f0f0;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-icons a {
+      background-color: #1f2d4a;
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+  .desktop-nav {
     display: none;
-  }
-
-  .menu-toggle {
-    font-size: 1.8rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #004466;
-    padding: 10px;
-  }
-
-  .tiles {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  .tile {
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    border-radius: 12px;
-  }
-
-  .tile:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  }
-
-  .tile img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 15px;
-  }
-
-  .tile h3 {
-    color: #4A148C;
-    margin-bottom: 10px;
-  }
-
-  .tile ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .tile ul li::before {
-    content: "✔";
-    margin-right: 8px;
-    color: #4A148C;
-  }
-
-  .tile button {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #295CFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    text-align: center;
+    z-index: 9999;
+    align-items: flex-start;
+    text-align: left;
   }
-
-  .tile button:hover {
-    background-color: #1a46d9;
-  }
-
-  .social-banner {
-    background-color: #f0f0f0;
-    padding: 30px 20px;
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  .social-icons {
+  .desktop-nav.active {
     display: flex;
-    justify-content: center;
-    gap: 15px;
   }
-
-  .social-icons a {
-    background-color: #1f2d4a;
-    color: white;
-    width: 40px;
-    height: 40px;
+  nav ul {
+    align-items: flex-start !important;
+    text-align: left;
+  }
+  #nav-menu {
+    align-items: flex-start;
+  }
+  .tiles {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
   }
-
-  .social-icons a:hover {
-    transform: scale(1.1);
-  }
-
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #eee;
-    margin-top: 40px;
-  }
-
-  .blog-carousel {
+  .tiles {
     display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    scroll-snap-type: x mandatory;
+    flex-direction: column;
+    align-items: center;
   }
-
-  .blog-carousel article {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
+  .menu-toggle-wrapper {
+    display: block;
   }
-
-  .blog-carousel::-webkit-scrollbar {
-    height: 8px;
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 9999;
   }
-
-  .blog-carousel::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
+  nav ul.active {
+    display: flex;
   }
-
-  .blog-carousel::-webkit-scrollbar-track {
-    background: #f0f0f0;
+  .menu-toggle {
+    display: block;
   }
-
-  #reservation::before {
+  .tiles {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .tiles {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .blog-carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+    }
+    .blog-carousel article {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+    }
+    .blog-carousel::-webkit-scrollbar {
+      height: 8px;
+    }
+    .blog-carousel::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+    .blog-carousel::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    #reservation::before {
     content: "";
     position: absolute;
     top: 0;
@@ -222,83 +259,47 @@
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
   }
-
   @media (max-width: 768px) {
-    .desktop-nav {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      position: absolute;
-      top: 70px;
-      right: 20px;
-      background: #fff;
-      padding: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      z-index: 9999;
-      align-items: flex-start;
+    #blog .tiles {
+      display: flex !important;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
-
-    .desktop-nav.active {
-      display: flex;
-    }
-
-    nav ul {
-      flex-direction: column;
-      align-items: flex-start !important;
-    }
-
-    .menu-toggle-wrapper {
-      display: block;
-    }
-
-    .menu-toggle {
-      display: block;
-    }
-
-    .tiles {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    nav {
-      position: static;
-      transform: none;
+    #blog .tile {
+      flex: 0 0 80%;
+      scroll-snap-align: start;
+      margin-right: 15px;
     }
   }
 </style>
 </head>
 <body>
   <header>
-  <div class="header-container" style="position: relative;">
-    <!-- Logo à gauche -->
-    <img src="Logo_entreprise/KAZ_Logo.png" alt="Logo KAZ" style="height: 60px;">
-
-    <!-- Menu CENTRÉ en absolu -->
-    <nav style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <div class="header-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+<img src="Logo_entreprise/KAZ_Logo.png" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
+      <div class="menu-toggle-wrapper"><button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div><!-- fin bouton menu-toggle-wrapper -->
+      <nav>
   <ul id="nav-menu" class="desktop-nav">
-    <li><a href="#accueil" class="animate__animated animate__flipInX">Accueil</a></li>
-    <li><a href="#services" class="animate__animated animate__flipInX">Services</a></li>
-    <li><a href="#reservation" class="animate__animated animate__flipInX">Réserver</a></li>
-    <li><a href="#contact" class="animate__animated animate__flipInX">Contact</a></li>
-    <li><a href="#blog" class="animate__animated animate__flipInX">Blog</a></li>
-    <li><a href="#join" class="animate__animated animate__flipInX">Nous Rejoindre</a></li>
-  </ul>
-</nav>
-
-
-    <!-- Boutons à droite -->
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <a href="#contact" style="background-color: #c0392b; color: white; padding: 10px 15px; border-radius: 4px; font-weight: bold; text-decoration: none;">Contactez-nous</a>
-      <a href="#login" style="border: 2px solid #1f2d4a; padding: 10px 15px; border-radius: 4px; font-weight: bold; color: #1f2d4a; text-decoration: none;">Mon Espace</a>
+          <li><a href="#accueil" class="animate__animated animate__flipInX">Accueil</a></li>
+          <li><a href="#services" class="animate__animated animate__flipInX">Services</a></li>
+          <li><a href="#reservation" class="animate__animated animate__flipInX">Réserver</a></li>
+          <li><a href="#contact" class="animate__animated animate__flipInX">Contact</a></li>
+          <li><a href="#blog" class="animate__animated animate__flipInX">Blog</a></li>
+          <li><a href="#join" class="animate__animated animate__flipInX">Nous Rejoindre</a></li>
+          <li style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+  <a href="#contact" class="animate__animated animate__flipInX" style="background-color: #c0392b; color: white; padding: 10px 15px; border-radius: 4px; font-weight: bold; display: inline-block;">Contactez-nous</a>
+  <a href="#login" class="animate__animated animate__flipInX" style="border: 2px solid #1f2d4a; padding: 10px 15px; border-radius: 4px; font-weight: bold; color: #1f2d4a; display: inline-block;">Mon Espace</a>
+</li>
+        </ul>
+      </nav>
     </div>
-  </div>
-</header>
+  </header>
 
   <main>
     <section id="accueil" style="margin: 0; padding: 120px 20px 60px 20px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1600x600') center/cover no-repeat; color: white;">
   <h2 class="animate__animated animate__fadeInDown">Développez. Innovez. Performez.</h2>
-  <p class="animate__animated animate__fadeInDown animate__delay-1s">Conseil stratégique, digital & data en Guadeloupe et Martinique.</p>
+  <p class="animate__animated animate__fadeInDown animate__delay-1s">Conseil stratégique, digital et data en Guadeloupe.</p>
 </section>
 
     <section id="services">
@@ -375,26 +376,26 @@
     </section>
 
     <section id="blog" style="margin: 60px 20px;">
-      <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
-      <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
-      <div class="tiles" style="grid-template-columns: repeat(3, 1fr);">
-  <div class="tile" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-    <img src="https://via.placeholder.com/300x180" alt="Article 1" style="width: 100%; height: auto;">
-    <h4>7 outils indispensables pour un Data Analyst</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
+  <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
+  <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
+  <div class="tiles blog-carousel">
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 1" style="width: 100%; height: auto;">
+      <h4>7 outils indispensables pour un Data Analyst</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
+    </div>
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 2" style="width: 100%; height: auto;">
+      <h4>Devstral, le LLM de Mistral dédié au développement d’agent IA</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+    </div>
+    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
+      <img src="https://via.placeholder.com/300x180" alt="Article 3" style="width: 100%; height: auto;">
+      <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
+      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
+    </div>
   </div>
-  <div class="tile">
-    <img src="https://via.placeholder.com/300x180" alt="Article 2" style="width: 100%; height: auto;">
-    <h4>Devstral, le LLM de Mistral dédié au développement d’agent IA</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-  </div>
-  <div class="tile">
-    <img src="https://via.placeholder.com/300x180" alt="Article 3" style="width: 100%; height: auto;">
-    <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
-    <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-  </div>
-</div>
-    </section>
+</section>
 
     <section id="contact" style="padding: 0 20px;">
       <h2>Contact</h2>
@@ -416,7 +417,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Cabinet Conseil - Tous droits réservés.</p>
+    <p>&copy; 2025 KAZ - Tous droits réservés.</p>
   </footer>
 
   <script>
