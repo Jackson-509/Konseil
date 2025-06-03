@@ -234,77 +234,105 @@
 </div>
 
 <script>
-  const banner = document.getElementById('banniere-cookies');
-  const configBtn = document.querySelector('.cookie-btn.secondary'); // "Configurer"
-  const settings = document.getElementById('cookie-settings');
-  const closeSettings = document.getElementById('close-settings');
-  const saveSettings = document.getElementById('save-settings');
-  const analyticsCheckbox = document.getElementById('analytics-consent');
+  // cookies.js
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("banniere-cookies");
+  const configBtn = document.querySelector(".cookie-btn.secondary"); // "Configurer"
+  const settings = document.getElementById("cookie-settings");
+  const closeSettings = document.getElementById("close-settings");
+  const saveSettings = document.getElementById("save-settings");
+  const analyticsCheckbox = document.getElementById("analytics-consent");
+  const overlay = document.getElementById("cookie-overlay");
 
-  // Si déjà accepté
-  if (localStorage.getItem('cookiesAccepted') === 'true') {
-    banner.style.display = 'none';
+  // Si l'utilisateur a déjà accepté les cookies
+  if (localStorage.getItem("cookiesAccepted") === "true") {
+    banner.style.display = "none";
+    overlay.style.display = "none";
   }
 
   // Accepter directement
-  document.getElementById('accepter-cookies').addEventListener('click', function () {
-    localStorage.setItem('cookiesAccepted', 'true');
-    localStorage.setItem('analyticsAllowed', 'true');
-    banner.style.display = 'none';
-    loadAnalytics(); // active GA
+  document
+    .getElementById("accepter-cookies")
+    .addEventListener("click", function () {
+      localStorage.setItem("cookiesAccepted", "true");
+      localStorage.setItem("analyticsAllowed", "true");
+      banner.style.display = "none";
+      overlay.style.display = "none";
+      loadAnalytics();
+    });
+
+  // Refuser
+  document.querySelectorAll(".cookie-btn.secondary")[1]?.addEventListener("click", () => {
+    localStorage.setItem("cookiesAccepted", "true");
+    localStorage.setItem("analyticsAllowed", "false");
+    banner.style.display = "none";
+    settings.style.display = "none";
+    overlay.style.display = "none";
   });
 
-  // Ouvrir le panneau config
-  configBtn.addEventListener('click', () => {
-    settings.style.display = 'block';
-    banner.style.display = 'none';
+  // Ouvrir le panneau configuration
+  configBtn.addEventListener("click", () => {
+    settings.style.display = "block";
+    banner.style.display = "none";
   });
 
   // Fermer config sans enregistrer
-  closeSettings.addEventListener('click', () => {
-    settings.style.display = 'none';
-    banner.style.display = 'block';
+  closeSettings.addEventListener("click", () => {
+    settings.style.display = "none";
+    banner.style.display = "block";
   });
 
   // Enregistrer config
-  saveSettings.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    localStorage.setItem('analyticsAllowed', analyticsCheckbox.checked ? 'true' : 'false');
-    settings.style.display = 'none';
-    banner.style.display = 'none';
+  saveSettings.addEventListener("click", () => {
+    localStorage.setItem("cookiesAccepted", "true");
+    localStorage.setItem(
+      "analyticsAllowed",
+      analyticsCheckbox.checked ? "true" : "false"
+    );
+    settings.style.display = "none";
+    banner.style.display = "none";
+    overlay.style.display = "none";
     if (analyticsCheckbox.checked) {
       loadAnalytics();
     }
   });
 
-  // Charger GA si autorisé
-  if (localStorage.getItem('analyticsAllowed') === 'true') {
+  // Bouton "Modifier mes préférences"
+  document.getElementById("edit-cookies").addEventListener("click", function () {
+    settings.style.display = "block";
+    overlay.style.display = "block";
+  });
+
+  // Lancer GA si autorisé
+  if (localStorage.getItem("analyticsAllowed") === "true") {
     loadAnalytics();
   }
 
   function loadAnalytics() {
     if (!window.gaLoaded) {
       window.gaLoaded = true;
-      const gtag = document.createElement('script');
-      gtag.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX');
-      gtag.setAttribute('async', '');
+      const gtag = document.createElement("script");
+      gtag.setAttribute("src", "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX");
+      gtag.setAttribute("async", "");
       document.head.appendChild(gtag);
 
       window.dataLayer = window.dataLayer || [];
-      function gtagFunc(){ dataLayer.push(arguments); }
+      function gtagFunc() {
+        dataLayer.push(arguments);
+      }
       window.gtag = gtagFunc;
 
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXX');
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXX");
     }
   }
-  // Bouton "Modifier mes préférences"
-document.getElementById('edit-cookies').addEventListener('click', function () {
-  settings.style.display = 'block';
 });
 
 </script>
 
+<div id="cookie-overlay" class="cookie-overlay"></div>
+<div id="cookie-overlay"></div>
+<script src="cookies.js" defer></script>
 
 </body>
 </html>
