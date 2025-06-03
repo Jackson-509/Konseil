@@ -615,4 +615,24 @@
     font-size: 1rem;
   }
 }
+@media (max-width: 768px) {
+  .cookie-popup {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 90%;
+    max-width: 95%;
+  }
+}
 
+.cookie-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7); /* ou transparent */
+  z-index: 9998;
+  backdrop-filter: blur(2px);
+  pointer-events: auto;
+}
