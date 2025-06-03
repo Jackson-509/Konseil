@@ -8,7 +8,8 @@
   <title>Cabinet Conseil - Réservation</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <body>
   <header>
@@ -33,60 +34,53 @@
   </header>
 
   <main>
-    <section id="accueil" style="margin: 0; padding: 120px 20px 60px 20px; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1600x600') center/cover no-repeat; color: white;">
-  <h2 class="animate__animated animate__fadeInDown">Développez. Innovez. Performez.</h2>
-  <p class="animate__animated animate__fadeInDown animate__delay-1s">Conseil stratégique, digital et data en Guadeloupe.</p>
+    <section class="hero-antilles">
+  <div class="hero-container">
+    <h1>Osez votre transformation.</h1>
+    <p>Un accompagnement stratégique, digital et data 100% Guadeloupe.</p>
+    <a href="#services" class="hero-btn">Commencer</a>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 320">
+    <path fill="#ffffff" fill-opacity="1"
+      d="M0,160L60,176C120,192,240,224,360,229.3C480,235,600,213,720,186.7C840,160,960,128,1080,112C1200,96,1320,96,1380,96L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
+    </path>
+  </svg>
 </section>
 
     <section id="services">
   <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #004466;">Nos Services</h2>
   <div class="tiles">
-    <div class="tile" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-      <img src="Nos_services\pexels-kampus-8441790.jpg" alt="Conseil financier">
-      <h3>Conseil Financier & Investissements</h3>
-      <ul>
-        <li>Optimisation financière</li>
-        <li>Recherche de financements</li>
-        <li>Gestion de trésorerie</li>
-        <li>Accompagnement stratégique</li>
-      </ul>
-      <button>En savoir plus</button>
+    <div class="tile service-card card-blue animate__animated animate__fadeInUp">
+      <div class="icon-wrapper"><i class="fas fa-piggy-bank"></i></div>
+      <div class="big-number">1</div>
+      <h3>Conseil Financier</h3>
+      <p>Optimisation, financement et gestion stratégique pour vos projets.</p>
+      <a href="#" class="cta-btn">Découvrir</a>
     </div>
-    <div class="tile">
-      <img src="Nos_services\pexels-cottonbro-5082581.jpg" alt="Création digitale">
-      <h3>Création de site & application mobile</h3>
-      <ul>
-        <li>Sites vitrines & e-commerce</li>
-        <li>Applications Android/iOS</li>
-        <li>Design UX/UI</li>
-        <li>Maintenance & évolution</li>
-      </ul>
-      <button>En savoir plus</button>
+    <div class="tile service-card card-pink animate__animated animate__fadeInUp">
+      <div class="icon-wrapper"><i class="fas fa-laptop-code"></i></div>
+      <div class="big-number">2</div>
+      <h3>Création Digitale</h3>
+      <p>Sites vitrines, e-commerce et applications mobiles personnalisées.</p>
+      <a href="#" class="cta-btn">Voir nos créations</a>
     </div>
-    <div class="tile">
-      <img src="Nos_services\istockphoto-1194668023-2048x2048.jpg" alt="Étude de marché">
+    <div class="tile service-card card-purple animate__animated animate__fadeInUp">
+      <div class="icon-wrapper"><i class="fas fa-chart-bar"></i></div>
+      <div class="big-number">3</div>
       <h3>Études de Marché</h3>
-      <ul>
-        <li>Analyse concurrentielle</li>
-        <li>Enquêtes terrain & sondages</li>
-        <li>Tendances & comportement client</li>
-        <li>Rapport stratégique</li>
-      </ul>
-      <button>En savoir plus</button>
+      <p>Analyse concurrentielle, tendances et comportements clients.</p>
+      <a href="#" class="cta-btn">En savoir plus</a>
     </div>
-    <div class="tile">
-      <img src="Nos_services\pexels-sora-shimazaki-5926395.jpg" alt="Data Analytics">
-      <h3>Analyse Statistique & Data</h3>
-      <ul>
-        <li>Reporting sur-mesure</li>
-        <li>Analyse de performance</li>
-        <li>Data Visualisation</li>
-        <li>Recommandations stratégiques</li>
-      </ul>
-      <button>En savoir plus</button>
+    <div class="tile service-card card-green animate__animated animate__fadeInUp">
+      <div class="icon-wrapper"><i class="fas fa-database"></i></div>
+      <div class="big-number">4</div>
+      <h3>Analyse de Données</h3>
+      <p>Dashboards, reporting avancé et visualisation stratégique.</p>
+      <a href="#" class="cta-btn">Explorer</a>
     </div>
   </div>
 </section>
+
 
     <section id="reservation" style="position: relative; background: url('Bannieres_site/frank-huang-WxQdHLGT7s8-unsplash.jpg') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh; overflow: hidden;">
       <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem; color: #ffffff; font-weight: 900; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">Réservez une prestation</h2>
@@ -133,11 +127,22 @@
   </div>
 </section>
 
-    <section id="contact" style="padding: 0 20px;">
-      <h2>Contact</h2>
-      <p>Email : contact@cabinetconseil.fr</p>
-      <p>Téléphone : +590 690 00 00 00</p>
-    </section>
+    <section id="contact" class="contact-section">
+  <div class="contact-container">
+    <div class="contact-text">
+      <h2>Restons en contact</h2>
+      <p>Vous avez une question ou besoin de plus d'infos ? Écrivez-nous, on vous répond vite !</p>
+      <a href="mailto:contact@cabinetconseil.fr" class="contact-btn">Contactez-nous</a>
+      <p class="contact-details">
+        📧 <a href="mailto:contact@cabinetconseil.fr">contact@cabinetconseil.fr</a><br>
+        📞 <a href="tel:+590690000000">+590 690 00 00 00</a>
+      </p>
+    </div>
+    <div class="contact-image">
+      <img src="https://img.icons8.com/ios-filled/100/ffffff/new-post.png" alt="Icône mail">
+    </div>
+  </div>
+</section>
 
     <section class="social-banner">
       <h2>Nos réseaux</h2>
@@ -153,8 +158,13 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 KAZ - Tous droits réservés.</p>
-  </footer>
+  <p>&copy; 2025 KAZ - Tous droits réservés. 
+    <a href="#" id="edit-cookies" style="margin-left: 15px; text-decoration: underline; color: #004466;">
+      Modifier mes préférences cookies
+    </a>
+  </p>
+</footer>
+
 
   <script>
   function toggleMenu() {
@@ -181,5 +191,120 @@
   }
 });
 </script>
+<div id="banniere-cookies" class="cookie-popup animate__animated animate__fadeInUp">
+  <h3>À propos de votre vie privée</h3>
+  <p>Nous et nos <a href="#">partenaires</a> utilisons des cookies pour stocker, accéder et traiter des informations non sensibles depuis votre appareil. Cela nous permet d’améliorer nos services et de personnaliser votre expérience.</p>
+  <p><em style="color: #1f2d4a;"><strong>La collecte de données, c’est barbant. Promis, on ne lira pas (trop) vos infos.</strong></em></p>
+  <div class="cookie-buttons">
+    <button class="cookie-btn secondary">Configurer</button>
+    <button class="cookie-btn secondary">Refuser</button>
+    <button class="cookie-btn primary" id="accepter-cookies">Accepter</button>
+  </div>
+</div>
+<script>
+  document.getElementById('accepter-cookies').addEventListener('click', function () {
+    document.getElementById('banniere-cookies').style.display = 'none';
+    // Ici tu peux stocker l'acceptation dans localStorage ou un cookie
+  });
+</script>
+<script>
+  const banner = document.getElementById('banniere-cookies');
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    banner.style.display = 'none';
+  }
+
+  document.getElementById('accepter-cookies').addEventListener('click', function () {
+    localStorage.setItem('cookiesAccepted', 'true');
+    banner.style.display = 'none';
+  });
+</script>
+<div id="cookie-settings" class="cookie-popup animate__animated animate__fadeInUp" style="display: none;">
+  <h3>Paramètres des cookies</h3>
+  <p>Choisissez les types de cookies que vous souhaitez autoriser :</p>
+  
+  <label style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+    <input type="checkbox" id="analytics-consent">
+    Autoriser Google Analytics (cookies statistiques)
+  </label>
+
+  <div class="cookie-buttons">
+    <button class="cookie-btn secondary" id="close-settings">Annuler</button>
+    <button class="cookie-btn primary" id="save-settings">Enregistrer</button>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('banniere-cookies');
+  const configBtn = document.querySelector('.cookie-btn.secondary'); // "Configurer"
+  const settings = document.getElementById('cookie-settings');
+  const closeSettings = document.getElementById('close-settings');
+  const saveSettings = document.getElementById('save-settings');
+  const analyticsCheckbox = document.getElementById('analytics-consent');
+
+  // Si déjà accepté
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    banner.style.display = 'none';
+  }
+
+  // Accepter directement
+  document.getElementById('accepter-cookies').addEventListener('click', function () {
+    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem('analyticsAllowed', 'true');
+    banner.style.display = 'none';
+    loadAnalytics(); // active GA
+  });
+
+  // Ouvrir le panneau config
+  configBtn.addEventListener('click', () => {
+    settings.style.display = 'block';
+    banner.style.display = 'none';
+  });
+
+  // Fermer config sans enregistrer
+  closeSettings.addEventListener('click', () => {
+    settings.style.display = 'none';
+    banner.style.display = 'block';
+  });
+
+  // Enregistrer config
+  saveSettings.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem('analyticsAllowed', analyticsCheckbox.checked ? 'true' : 'false');
+    settings.style.display = 'none';
+    banner.style.display = 'none';
+    if (analyticsCheckbox.checked) {
+      loadAnalytics();
+    }
+  });
+
+  // Charger GA si autorisé
+  if (localStorage.getItem('analyticsAllowed') === 'true') {
+    loadAnalytics();
+  }
+
+  function loadAnalytics() {
+    if (!window.gaLoaded) {
+      window.gaLoaded = true;
+      const gtag = document.createElement('script');
+      gtag.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX');
+      gtag.setAttribute('async', '');
+      document.head.appendChild(gtag);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtagFunc(){ dataLayer.push(arguments); }
+      window.gtag = gtagFunc;
+
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    }
+  }
+  // Bouton "Modifier mes préférences"
+document.getElementById('edit-cookies').addEventListener('click', function () {
+  settings.style.display = 'block';
+});
+
+</script>
+
+
 </body>
 </html>
