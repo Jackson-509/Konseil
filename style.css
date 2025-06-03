@@ -615,12 +615,4 @@
     font-size: 1rem;
   }
 }
-@media (max-width: 768px) {
-  .cookie-popup {
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
-    width: 90%;
-    max-width: 95%;
-  }
-}
+
