@@ -1,4 +1,4 @@
-<!-- Le contenu complet avec toutes les  sections -->
+<!-- Le contenu complet avec toutes les sections -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -107,23 +107,36 @@
     <section id="blog" style="margin: 60px 20px;">
   <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
   <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
-  <div class="tiles blog-carousel">
-    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
-      <img src="Nos_services/pexels-cottonbro-5082581.jpg" alt="Article 1" style="width: 100%; height: auto;">
-      <h4>7 outils indispensables pour un Data Analyst</h4>
-      <p style="font-weight: bold; font-size: 0.9rem;">mai 30, 2025</p>
-    </div>
-    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
-      <img src="Nos_services/pexels-kampus-8441790.jpg" alt="Article 2" style="width: 100%; height: auto;">
-      <h4>Comment rassurez vos fournisseurs ?</h4>
-      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-    </div>
-    <div class="tile" style="min-width: 280px; scroll-snap-align: start;">
-      <img src="Nos_services/pexels-sora-shimazaki-5926395.jpg" alt="Article 3" style="width: 100%; height: auto;">
-      <h4>Tips pour devenir le meilleur développeur FullStack en 2025</h4>
-      <p style="font-weight: bold; font-size: 0.9rem;">mai 28, 2025</p>
-    </div>
-  </div>
+  <div id="rss-blog-tiles" class="tiles"></div>
+
+<script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
+<script>
+  const parser = new RSSParser();
+  const feeds = [
+    { url: 'https://www.lemonde.fr/economie/rss_full.xml', label: 'Économie' },
+    { url: 'https://www.lesechos.fr/rss/rss_entreprises.xml', label: 'Entreprises' },
+    { url: 'https://www.numerama.com/feed/', label: 'Technologie' }
+  ];
+
+  const container = document.getElementById('rss-blog-tiles');
+
+  feeds.forEach(feed => {
+    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(feed.url))
+      .then(res => res.json())
+      .then(data => parser.parseString(data.contents))
+      .then(parsed => {
+        parsed.items.slice(0, 2).forEach(item => {
+          container.innerHTML += `
+            <div class="tile">
+              <span style="font-size: 0.8rem; font-weight: bold;">${feed.label}</span>
+              <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
+              <p style="font-size: 0.9rem;">${item.contentSnippet.substring(0, 100)}...</p>
+            </div>`;
+        });
+      });
+  });
+</script>
+
 </section>
 
     <section id="contact" class="contact-section">
@@ -159,12 +172,12 @@
     <div class="footer-links-block">
       <h3>Liens utiles</h3>
       <ul>
-  <li><a href="contact.html">Contactez-nous</a></li>
-  <li><a href="mentions-legales.html">Mentions légales</a></li>
-  <li><a href="cgu.html">CGU</a></li>
-  <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
-  <li><a href="parametres-cookies.html">Paramètres des cookies</a></li>
-</ul>
+        <li><a href="#contact">Contactez-nous</a></li>
+        <li><a href="#legal">Mentions légales</a></li>
+        <li><a href="#cgu">CGU</a></li>
+        <li><a href="#privacy">Politique de confidentialité</a></li>
+        <li><a href="#cookies">Paramètres des cookies</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
