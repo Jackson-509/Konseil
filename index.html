@@ -105,39 +105,16 @@
     </section>
 
     <section id="blog" style="margin: 60px 20px;">
-  <h2 style="color: #c0392b; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Blog</h2>
-  <h3 style="margin-bottom: 20px;">Nos articles du moment</h3>
-  <div id="rss-blog-tiles" class="tiles"></div>
-
-<script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
-<script>
-  const parser = new RSSParser();
-  const feeds = [
-    { url: 'https://www.lemonde.fr/economie/rss_full.xml', label: 'Économie' },
-    { url: 'https://www.lesechos.fr/rss/rss_entreprises.xml', label: 'Entreprises' },
-    { url: 'https://www.numerama.com/feed/', label: 'Technologie' }
-  ];
-
-  const container = document.getElementById('rss-blog-tiles');
-
-  feeds.forEach(feed => {
-    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(feed.url))
-      .then(res => res.json())
-      .then(data => parser.parseString(data.contents))
-      .then(parsed => {
-        parsed.items.slice(0, 2).forEach(item => {
-          container.innerHTML += `
-            <div class="tile">
-              <span style="font-size: 0.8rem; font-weight: bold;">${feed.label}</span>
-              <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
-              <p style="font-size: 0.9rem;">${item.contentSnippet.substring(0, 100)}...</p>
-            </div>`;
-        });
-      });
-  });
-</script>
-
+  <h2 style="color: #004466;">📰 Blog Dynamique</h2>
+  <div class="buttons">
+    <button onclick="loadFeed('https://www.lemonde.fr/economie/rss_full.xml')">Économie</button>
+    <button onclick="loadFeed('https://www.lemonde.fr/planete/rss_full.xml')">Environnement</button>
+    <button onclick="loadFeed('https://www.lemonde.fr/pixels/rss_full.xml')">Technologie</button>
+    <button onclick="loadFeed('https://www.lemonde.fr/m-perso/rss_full.xml')">Développement personnel</button>
+  </div>
+  <div class="blog-container" id="blog-container"></div>
 </section>
+
 
     <section id="contact" class="contact-section">
   <div class="contact-container">
@@ -354,6 +331,75 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="cookie-overlay" class="cookie-overlay"></div>
 <div id="cookie-overlay"></div>
 <script src="cookies.js" defer></script>
+  <script>
+  let currentIndex = 0;
+  let autoScrollInterval;
+
+  async function loadFeed(feedUrl) {
+    const encodedUrl = encodeURIComponent(feedUrl);
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodedUrl}`;
+    const blog = document.getElementById('blog-container');
+    blog.innerHTML = '<p>Chargement des articles...</p>';
+
+    try {
+      const response = await fetch(proxyUrl);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const result = await response.json();
+      if (!result.contents || result.contents.trim().length === 0) throw new Error('Contenu vide');
+
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(result.contents, 'text/xml');
+      const items = xml.querySelectorAll('item');
+      blog.innerHTML = '';
+
+      if (items.length === 0) {
+        blog.innerHTML = '<p>Aucun article disponible.</p>';
+        return;
+      }
+
+      for (let i = 0; i < Math.min(items.length, 6); i++) {
+        const item = items[i];
+        const title = item.querySelector('title')?.textContent || 'Sans titre';
+        const link = item.querySelector('link')?.textContent || '#';
+        const pubDate = item.querySelector('pubDate')?.textContent || 'Date inconnue';
+
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.innerHTML = `
+          <h3>${title}</h3>
+          <p>${pubDate.substring(0, 10)}</p>
+          <p><a href="${link}" target="_blank">Lire l'article</a></p>
+        `;
+        blog.appendChild(tile);
+      }
+
+      if (window.innerWidth <= 768) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(() => {
+          const container = document.querySelector('#blog .blog-container');
+          const tiles = container.querySelectorAll('.tile');
+          if (tiles.length === 0) return;
+
+          currentIndex = (currentIndex + 1) % tiles.length;
+          container.scrollTo({
+            left: tiles[currentIndex].offsetLeft,
+            behavior: 'smooth'
+          });
+        }, 4000);
+      }
+
+    } catch (error) {
+      blog.innerHTML = '<p>Erreur lors du chargement du flux RSS. Veuillez réessayer plus tard.</p>';
+      console.error('Erreur RSS:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFeed('https://www.lemonde.fr/economie/rss_full.xml');
+  });
+</script>
+
 
 </body>
 </html>
