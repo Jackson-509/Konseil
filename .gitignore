@@ -1,0 +1,11 @@
+# Fichiers sensibles
+config.py
+reservations.csv
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Environnement virtuel
+env/
+venv/
