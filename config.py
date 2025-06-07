@@ -12,7 +12,7 @@ MAIL_SETTINGS = {
     'MAIL_PORT': 587,
     'MAIL_USE_TLS': True,
     'MAIL_USERNAME': 'info.aristil.jackson@gmail.com',
-    'MAIL_PASSWORD': 'TON_MOT_DE_PASSE_APP',  # 🔐 À remplacer par ton mot de passe d’application Gmail
+    'MAIL_PASSWORD': 'O1j1#l92',  # 🔐 À remplacer par ton mot de passe d’application Gmail
     'MAIL_DEFAULT_SENDER': ('Cabinet Conseil', 'info.aristil.jackson@gmail.com')
 }
 
