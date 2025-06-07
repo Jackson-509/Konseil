@@ -7,13 +7,13 @@
   <title>Cabinet Conseil - Réservation</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <body>
   <header>
     <div class="header-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-<img src="Logo_entreprise/KAZ_Logo.png" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
+<img src="{{ url_for('static', filename='Logo_entreprise/KAZ_Logo.png') }}" alt="Logo KAZ" style="height: 60px; margin-right: auto;">
       <div class="menu-toggle-wrapper"><button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div><!-- fin bouton menu-toggle-wrapper -->
       <nav>
   <ul id="nav-menu" class="desktop-nav">
@@ -81,7 +81,7 @@
 </section>
 
 
-    <section id="reservation" style="position: relative; background: url('Bannieres_site/frank-huang-WxQdHLGT7s8-unsplash.jpg') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh; overflow: hidden;">
+    <section id="reservation" style="position: relative; background: url('{{ url_for('static', filename='Bannieres_site/frank-huang-WxQdHLGT7s8-unsplash.jpg') }}') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh; overflow: hidden;">
       <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem; color: #ffffff; font-weight: 900; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">Réservez une prestation</h2>
       <form id="booking-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 2;">
         <label for="lastname">Nom</label>
@@ -137,7 +137,7 @@
   <footer class="custom-footer">
   <div class="footer-content">
     <div class="footer-logo-block">
-      <img src="Logo_entreprise/KAZ_Logo.png" alt="Logo KAZ">
+      <img src="{{ url_for('static', filename='Logo_entreprise/KAZ_Logo.png') }}">
       <p>Boostez votre business grâce à vos données.</p>
       <div class="social-icons-footer">
         <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
