@@ -1,15 +1,18 @@
-# config.py
 import os
 
-CSV_FILE = 'reservations.csv'
+# Clé secrète Flask
 SECRET_KEY = 'top-secret-key'
 
-# Config SMTP Gmail (si tu ajoutes les mails après)
+# Fichier CSV de réservation
+CSV_FILE = 'reservations.csv'
+
+# Configuration SMTP pour Gmail
 MAIL_SETTINGS = {
     'MAIL_SERVER': 'smtp.gmail.com',
     'MAIL_PORT': 587,
     'MAIL_USE_TLS': True,
-    'MAIL_USERNAME': 'ton.email@gmail.com',
-    'MAIL_PASSWORD': 'mot_de_passe_application',
-    'MAIL_DEFAULT_SENDER': ('Cabinet Conseil', 'ton.email@gmail.com')
+    'MAIL_USERNAME': 'info.aristil.jackson@gmail.com',
+    'MAIL_PASSWORD': 'TON_MOT_DE_PASSE_APP',  # 🔐 À remplacer par ton mot de passe d’application Gmail
+    'MAIL_DEFAULT_SENDER': ('Cabinet Conseil', 'info.aristil.jackson@gmail.com')
 }
+
