@@ -1,7 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import csv, os
 
 app = Flask(__name__)
-app.secret_key = 'super-secret-key'  # à changer en prod
+app.secret_key = 'top-secret-key'
+
+CSV_FILE = 'reservations.csv'
+
+def enregistrer_csv(data):
+    file_exists = os.path.isfile(CSV_FILE)
+    with open(CSV_FILE, mode='a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if not file_exists:
+            writer.writerow(["Nom", "Prénom", "Email", "Service", "Date", "Heure"])
+        writer.writerow(data)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -13,27 +24,13 @@ def index():
         date = request.form.get('date')
         heure = request.form.get('time')
 
-        print(f"[Réservation] {nom} {prenom} - {email} - {service} le {date} à {heure}")
+        # Enregistrement dans le CSV
+        enregistrer_csv([nom, prenom, email, service, date, heure])
+
         flash("🎉 Réservation enregistrée avec succès !", "success")
         return redirect(url_for('index'))
 
     return render_template('index.html')
 
-@app.route('/cgu')
-def cgu():
-    return render_template('cgu.html')
-
-@app.route('/mentions-legales')
-def mentions():
-    return render_template('mentions-legales.html')
-
-@app.route('/parametres-cookies')
-def cookies():
-    return render_template('parametres-cookies.html')
-
-@app.route('/politique-confidentialite')
-def politique():
-    return render_template('politique-confidentialite.html')
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000, debug=True)
+    app.run(debug=True)
