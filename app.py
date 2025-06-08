@@ -26,11 +26,9 @@ def index():
         flash("🎉 Réservation enregistrée avec succès !", "success")
         return redirect(url_for('index'))  # ✅ redirige après POST
 
-    # ✅ Obligatoire pour le GET
     return render_template('index.html')
-    if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Render définit cette variable
-    app.run(host='0.0.0.0', port=port)        # Obligatoire pour exposer le port
 
-
-
+# 🔥 Ajoute ceci pour que Render puisse détecter le port automatiquement
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Render te donne le port via une variable d'env
+    app.run(host='0.0.0.0', port=port)
