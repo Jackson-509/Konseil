@@ -156,11 +156,10 @@
     <div class="footer-links-block">
       <h3>Liens utiles</h3>
       <ul>
-        <li><a href="index.html#contact">Contactez-nous</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="cgu.html">CGU</a></li>
-        <li><a href="politique-confidentialite.html">Politique de confidentialité</a></li>
-        <li><a href="parametres-cookies.html">Paramètres des cookies</a></li>
+        <li><a href="{{ url_for('mentions_legales') }}">Mentions légales</a></li>
+        <li><a href="{{ url_for('cgu') }}">CGU</a></li>
+        <li><a href="{{ url_for('politique_confidentialite') }}">Politique de confidentialité</a></li>
+        <li><a href="{{ url_for('parametres_cookies') }}">Paramètres des cookies</a></li>
       </ul>
     </div>
   </div>
