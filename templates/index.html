@@ -90,7 +90,7 @@
 
     <section id="reservation" style="position: relative; background: url('{{ url_for('static', filename='Bannieres_site/frank-huang-WxQdHLGT7s8-unsplash.jpg') }}') center/cover no-repeat fixed; padding: 60px 20px; min-height: 100vh; overflow: hidden;">
       <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem; color: #ffffff; font-weight: 900; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">Réservez une prestation</h2>
-      <form id="booking-form" method="POST" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 2;">
+      <form id="booking-form" method="POST" action="{{ url_for('index') }}" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; z-index: 2;">
         <label for="lastname">Nom</label>
         <input style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" type="text" id="lastname" name="lastname" required>
         <label for="firstname">Prénom</label>
