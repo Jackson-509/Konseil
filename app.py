@@ -1,14 +1,29 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from utils import enregistrer_csv, envoyer_mail, init_mail
-from config import SECRET_KEY
+from config import SECRET_KEY, SQLALCHEMY_DATABASE_URI
+from models import db, Reservation
+from werkzeug.security import check_password_hash
+from config import ADMIN_USERNAME, ADMIN_PASSWORD_HASH
+from collections import Counter
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
-# Initialiser Flask-Mail
+# 🔗 Config SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+
+# ✉️ Initialiser Flask-Mail
 init_mail(app)
 
+# 🧱 Initialiser DB si besoin
+with app.app_context():
+    db.create_all()
+    # importer_csv_vers_db("data/reservations.csv")  # ✅ si besoin une seule fois
+
+# 🌐 Accueil + enregistrement
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -19,16 +34,57 @@ def index():
         date = request.form.get('date')
         heure = request.form.get('time')
 
-        # Enregistre les données
         enregistrer_csv([nom, prenom, email, service, date, heure])
         envoyer_mail(prenom, email, service, date, heure)
 
         flash("🎉 Réservation enregistrée avec succès !", "success")
-        return redirect(url_for('index'))  # ✅ redirige après POST
+        return redirect(url_for('index'))
 
     return render_template('index.html')
 
-# 🔥 Ajoute ceci pour que Render puisse détecter le port automatiquement
+# 🔐 Connexion
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = request.form['username']
+        pwd = request.form['password']
+        if user == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, pwd):
+            session['logged_in'] = True
+            return redirect(url_for('admin'))
+        flash("Identifiants incorrects", "error")
+    return render_template('login.html')
+
+# 🔓 Déconnexion
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash("Déconnecté", "info")
+    return redirect(url_for('login'))
+
+# 🗂️ Admin : voir les réservations
+@app.route('/admin')
+def admin():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    reservations = Reservation.query.all()
+    return render_template('admin.html', reservations=reservations)
+
+# 📊 Dashboard de stats
+@app.route('/dashboard')
+def dashboard():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
+    reservations = Reservation.query.all()
+    services = [r.service for r in reservations]
+    dates = [r.date for r in reservations]
+
+    service_count = Counter(services)
+    date_count = Counter(dates)
+
+    return render_template("dashboard.html", service_count=service_count, date_count=date_count)
+
+# 🚀 Pour Render
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Render te donne le port via une variable d'env
+    port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
