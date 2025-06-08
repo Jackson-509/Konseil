@@ -24,12 +24,12 @@
       <div class="menu-toggle-wrapper"><button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button></div><!-- fin bouton menu-toggle-wrapper -->
       <nav>
   <ul id="nav-menu" class="desktop-nav">
-          <li><a href="#accueil" class="animate__animated animate__flipInX">Accueil</a></li>
-          <li><a href="#services" class="animate__animated animate__flipInX">Services</a></li>
-          <li><a href="#reservation" class="animate__animated animate__flipInX">Réserver</a></li>
-          <li><a href="#contact" class="animate__animated animate__flipInX">Contact</a></li>
-          <li><a href="#blog" class="animate__animated animate__flipInX">Blog</a></li>
-          <li><a href="#join" class="animate__animated animate__flipInX">Nous Rejoindre</a></li>
+          <a href="{{ url_for('index') }}#contact">Contact</a>
+          <a href="{{ url_for('index') }}#accueil">Accueil</a>
+          <a href="{{ url_for('index') }}#services">Services</a>
+          <a href="{{ url_for('index') }}#reservation">Réserver</a>
+          <a href="{{ url_for('index') }}#blog">Blog</a>
+          <a href="{{ url_for('index') }}#join">Nous Rejoindre</a>
           <li style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
   <a href="#contact" class="animate__animated animate__flipInX" style="background-color: #c0392b; color: white; padding: 10px 15px; border-radius: 4px; font-weight: bold; display: inline-block;">Contactez-nous</a>
   <a href="#login" class="animate__animated animate__flipInX" style="border: 2px solid #1f2d4a; padding: 10px 15px; border-radius: 4px; font-weight: bold; color: #1f2d4a; display: inline-block;">Mon Espace</a>
