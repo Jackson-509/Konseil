@@ -1,11 +1,12 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, Response
 from utils import enregistrer_csv, envoyer_mail, init_mail
-from config import SECRET_KEY, SQLALCHEMY_DATABASE_URI
+from config import SECRET_KEY, SQLALCHEMY_DATABASE_URI, ADMIN_USERNAME, ADMIN_PASSWORD_HASH
 from models import db, Reservation
 from werkzeug.security import check_password_hash
-from config import ADMIN_USERNAME, ADMIN_PASSWORD_HASH
 from collections import Counter
+import csv
+from io import StringIO
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -18,12 +19,11 @@ db.init_app(app)
 # ✉️ Initialiser Flask-Mail
 init_mail(app)
 
-# 🧱 Initialiser DB si besoin
+# 🧱 Créer la base si besoin
 with app.app_context():
     db.create_all()
-    # importer_csv_vers_db("data/reservations.csv")  # ✅ si besoin une seule fois
 
-# 🌐 Accueil + enregistrement
+# 🌐 Page d'accueil + Réservation
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -34,15 +34,28 @@ def index():
         date = request.form.get('date')
         heure = request.form.get('time')
 
+        # ✅ Enregistrement CSV + mail
         enregistrer_csv([nom, prenom, email, service, date, heure])
         envoyer_mail(prenom, email, service, date, heure)
+
+        # ✅ Enregistrement base SQLite
+        reservation = Reservation(
+            nom=nom,
+            prenom=prenom,
+            email=email,
+            service=service,
+            date=date,
+            heure=heure
+        )
+        db.session.add(reservation)
+        db.session.commit()
 
         flash("🎉 Réservation enregistrée avec succès !", "success")
         return redirect(url_for('index'))
 
     return render_template('index.html')
 
-# 🔐 Connexion
+# 🔐 Connexion admin
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -61,7 +74,7 @@ def logout():
     flash("Déconnecté", "info")
     return redirect(url_for('login'))
 
-# 🗂️ Admin : voir les réservations
+# 🗂️ Page admin - voir réservations
 @app.route('/admin')
 def admin():
     if not session.get('logged_in'):
@@ -69,7 +82,7 @@ def admin():
     reservations = Reservation.query.all()
     return render_template('admin.html', reservations=reservations)
 
-# 📊 Dashboard de stats
+# 📊 Statistiques
 @app.route('/dashboard')
 def dashboard():
     if not session.get('logged_in'):
@@ -83,10 +96,6 @@ def dashboard():
     date_count = Counter(dates)
 
     return render_template("dashboard.html", service_count=service_count, date_count=date_count)
-
-from flask import Response
-import csv
-from io import StringIO
 
 # 📥 Export CSV
 @app.route('/export')
@@ -111,6 +120,8 @@ def export():
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment;filename=reservations.csv"}
     )
+
+# 📄 Pages légales
 @app.route('/cgu')
 def cgu():
     return render_template('cgu.html')
@@ -126,7 +137,6 @@ def politique_confidentialite():
 @app.route('/parametres-cookies')
 def parametres_cookies():
     return render_template('parametres-cookies.html')
-
 
 # 🚀 Pour Render
 if __name__ == '__main__':
