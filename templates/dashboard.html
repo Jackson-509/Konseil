@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Statistiques</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.min.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>📊 Statistiques des Réservations</h2>
+
+    <div style="margin-top:30px">
+      <h3>Répartition par service</h3>
+      <canvas id="serviceChart" height="180"></canvas>
+    </div>
+
+    <div style="margin-top:40px">
+      <h3>Réservations par date</h3>
+      <canvas id="dateChart" height="180"></canvas>
+    </div>
+
+    <br>
+    <a href="{{ url_for('admin') }}" class="cta-btn">← Retour à l’admin</a>
+    <br><br>
+    <a href="{{ url_for('logout') }}" class="cta-btn" style="background:#ccc;color:#333;">🚪 Déconnexion</a>
+  </div>
+
+  <script>
+    // Données envoyées depuis Flask via Jinja2
+    const serviceData = {{ service_count | tojson }};
+    const dateData = {{ date_count | tojson }};
+
+    // Graphe services
+    new Chart(document.getElementById('serviceChart'), {
+      type: 'pie',
+      data: {
+        labels: Object.keys(serviceData),
+        datasets: [{
+          label: 'Réservations par service',
+          data: Object.values(serviceData),
+          backgroundColor: ['#295CFF', '#00b894', '#ff7675', '#ffeaa7', '#a29bfe', '#fab1a0']
+        }]
+      }
+    });
+
+    // Graphe dates
+    new Chart(document.getElementById('dateChart'), {
+      type: 'bar',
+      data: {
+        labels: Object.keys(dateData),
+        datasets: [{
+          label: 'Réservations par date',
+          data: Object.values(dateData),
+          backgroundColor: '#004466'
+        }]
+      },
+      options: {
+        scales: {
+          x: { ticks: { autoSkip: false } },
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
