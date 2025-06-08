@@ -111,6 +111,21 @@ def export():
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment;filename=reservations.csv"}
     )
+@app.route('/cgu')
+def cgu():
+    return render_template('cgu.html')
+
+@app.route('/mentions-legales')
+def mentions_legales():
+    return render_template('mentions-legales.html')
+
+@app.route('/politique-confidentialite')
+def politique_confidentialite():
+    return render_template('politique-confidentialite.html')
+
+@app.route('/parametres-cookies')
+def parametres_cookies():
+    return render_template('parametres-cookies.html')
 
 
 # 🚀 Pour Render
