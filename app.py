@@ -84,6 +84,35 @@ def dashboard():
 
     return render_template("dashboard.html", service_count=service_count, date_count=date_count)
 
+from flask import Response
+import csv
+from io import StringIO
+
+# 📥 Export CSV
+@app.route('/export')
+def export():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
+    reservations = Reservation.query.all()
+
+    si = StringIO()
+    writer = csv.writer(si)
+    writer.writerow(['Nom', 'Prénom', 'Email', 'Service', 'Date', 'Heure'])
+
+    for r in reservations:
+        writer.writerow([r.nom, r.prenom, r.email, r.service, r.date, r.heure])
+
+    output = si.getvalue()
+    si.close()
+
+    return Response(
+        output,
+        mimetype="text/csv",
+        headers={"Content-Disposition": "attachment;filename=reservations.csv"}
+    )
+
+
 # 🚀 Pour Render
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
