@@ -1,6 +1,6 @@
 import os
 
-SECRET_KEY = 'votre_clef_secrete'
+SECRET_KEY = '9f3b8e2aab2f4f30a7cdca842e61b1c7'
 
 MAIL_SETTINGS = {
     'MAIL_SERVER': 'smtp.gmail.com',
