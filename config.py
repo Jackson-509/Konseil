@@ -17,7 +17,7 @@ MAIL_SETTINGS = {
 }
 
 # 🗃️ Configuration base de données (SQLite par défaut, PostgreSQL sur Render)
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///data/reservations.db')
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///instance/reservations.db')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # 🔐 Identifiants admin (authentification)
