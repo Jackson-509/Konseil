@@ -1,6 +1,13 @@
 import csv, os
-from flask_mail import Message
+from flask_mail import Mail, Message
 from config import CSV_FILE, MAIL_SETTINGS
+
+mail = Mail()  # ⚠️ Objet global utilisé par Flask
+
+def init_mail(app):
+    """Initialise Flask-Mail avec les réglages de config."""
+    app.config.update(MAIL_SETTINGS)
+    mail.init_app(app)
 
 def enregistrer_csv(data):
     """Enregistre une réservation dans le fichier CSV."""
@@ -11,7 +18,7 @@ def enregistrer_csv(data):
             writer.writerow(["Nom", "Prénom", "Email", "Service", "Date", "Heure"])
         writer.writerow(data)
 
-def envoyer_mail(mail, prenom, email, service, date, heure):
+def envoyer_mail(prenom, email, service, date, heure):
     """Envoie un email de confirmation de réservation."""
     msg = Message(
         subject="Confirmation de votre réservation",
