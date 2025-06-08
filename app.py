@@ -28,5 +28,9 @@ def index():
 
     # ✅ Obligatoire pour le GET
     return render_template('index.html')
+    if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Render définit cette variable
+    app.run(host='0.0.0.0', port=port)        # Obligatoire pour exposer le port
+
 
 
