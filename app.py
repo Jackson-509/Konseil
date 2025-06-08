@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import csv, os
+from utils import send_email, init_mail
+from config import SECRET_KEY
 
 app = Flask(__name__)
-app.secret_key = 'top-secret-key'
+app.secret_key = SECRET_KEY
 
 CSV_FILE = 'reservations.csv'
+
+init_mail(app)  # ✅ Initialisation de Flask-Mail
 
 def enregistrer_csv(data):
     file_exists = os.path.isfile(CSV_FILE)
@@ -24,8 +28,8 @@ def index():
         date = request.form.get('date')
         heure = request.form.get('time')
 
-        # Enregistrement dans le CSV
         enregistrer_csv([nom, prenom, email, service, date, heure])
+        send_email(email, nom, prenom, service, date, heure)  # ✅ Envoi de l’email
 
         flash("🎉 Réservation enregistrée avec succès !", "success")
         return redirect(url_for('index'))
