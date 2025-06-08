@@ -19,12 +19,14 @@ def index():
         date = request.form.get('date')
         heure = request.form.get('time')
 
+        # Enregistre les données
         enregistrer_csv([nom, prenom, email, service, date, heure])
-        envoyer_mail(prenom, email, service, date, heure)  # ✅ Envoie le mail
+        envoyer_mail(prenom, email, service, date, heure)
 
         flash("🎉 Réservation enregistrée avec succès !", "success")
-        return redirect(url_for('index'))
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+        return redirect(url_for('index'))  # ✅ redirige après POST
+
+    # ✅ Obligatoire pour le GET
+    return render_template('index.html')
+
 
