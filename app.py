@@ -117,15 +117,15 @@ def cgu():
 
 @app.route('/mentions-legales')
 def mentions_legales():
-    return render_template('mentions-legales.html')
+    return render_template('mentions_legales.html')
 
 @app.route('/politique-confidentialite')
 def politique_confidentialite():
-    return render_template('politique-confidentialite.html')
+    return render_template('politique_confidentialite.html')
 
 @app.route('/parametres-cookies')
 def parametres_cookies():
-    return render_template('parametres-cookies.html')
+    return render_template('parametres_cookies.html')
 
 
 # 🚀 Pour Render
