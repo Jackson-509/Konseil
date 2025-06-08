@@ -16,10 +16,14 @@ MAIL_SETTINGS = {
     'MAIL_DEFAULT_SENDER': (os.getenv('MAIL_SENDER_NAME'), os.getenv('MAIL_USERNAME'))
 }
 
-# 🗃️ Configuration base de données (SQLite par défaut, PostgreSQL sur Render)
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///instance/reservations.db')
+# 🧠 Chemin absolu pour la base SQLite (fix Render)
+basedir = os.path.abspath(os.path.dirname(__file__))
+db_path = os.path.join(basedir, 'instance', 'reservations.db')
+
+# 🗃️ Config DB (SQLite ou PostgreSQL via DATABASE_URL)
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', f'sqlite:///{db_path}')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-# 🔐 Identifiants admin (authentification)
+# 🔐 Identifiants admin
 ADMIN_USERNAME = os.getenv('ADMIN_USERNAME', 'admin')
 ADMIN_PASSWORD_HASH = os.getenv('ADMIN_PASSWORD_HASH')  # Hash généré avec werkzeug
