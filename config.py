@@ -1,7 +1,7 @@
 import os
 
 # 🔐 Clé secrète Flask (lue depuis l'environnement)
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY_CONFIG")
 
 # ✉️ Paramètres mail (lus depuis l'environnement)
 MAIL_SETTINGS = {
