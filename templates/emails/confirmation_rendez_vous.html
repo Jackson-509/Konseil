@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de votre demande - Cabinet Konseil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #0d6efd;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            color: #0d6efd;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .title {
+            color: #0d6efd;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .details {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .detail-row {
+            margin-bottom: 10px;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+        .contact-info {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo">📊 Konseil</div>
+            <div class="title">Confirmation de votre demande</div>
+        </div>
+        
+        <div class="content">
+            <p>Bonjour <strong>{{ contact.nom }}</strong>,</p>
+            
+            <p>Nous avons bien reçu votre demande de contact concernant nos services de <strong>{{ contact.service }}</strong>.</p>
+            
+            <p>Voici un récapitulatif de votre demande :</p>
+            
+            <div class="details">
+                <div class="detail-row">
+                    <span class="detail-label">Nom :</span> {{ contact.nom }}
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email :</span> {{ contact.email }}
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Téléphone :</span> {{ contact.telephone }}
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Entreprise :</span> {{ contact.entreprise }}
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Service demandé :</span> {{ contact.service }}
+                </div>
+                {% if contact.date_rendez_vous %}
+                <div class="detail-row">
+                    <span class="detail-label">Date de rendez-vous souhaitée :</span> 
+                    {{ contact.date_rendez_vous.strftime('%d/%m/%Y à %H:%M') }}
+                </div>
+                {% endif %}
+                <div class="detail-row">
+                    <span class="detail-label">Message :</span><br>
+                    {{ contact.message }}
+                </div>
+            </div>
+            
+            <p>Notre équipe va étudier votre demande et vous contacter dans les plus brefs délais pour organiser un rendez-vous ou répondre à vos questions.</p>
+            
+            <div class="contact-info">
+                <strong>📞 Contactez-nous directement :</strong><br>
+                Email : contact@konseil-antilles.com<br>
+                Téléphone : +590 590 XX XX XX
+            </div>
+            
+            <p>En attendant, n'hésitez pas à consulter notre site web pour plus d'informations sur nos services.</p>
+            
+            <p>Cordialement,<br>
+            <strong>L'équipe Konseil</strong><br>
+            Cabinet de Conseil aux Antilles</p>
+        </div>
+        
+        <div class="footer">
+            <p>Cet email a été envoyé automatiquement suite à votre demande sur notre site web.</p>
+            <p>Cabinet Konseil - Spécialistes en conseil aux Antilles</p>
+        </div>
+    </div>
+</body>
+</html> 

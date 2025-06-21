@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau prospect - Cabinet Konseil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            color: #0d6efd;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .title {
+            color: #dc3545;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .alert {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        .prospect-info {
+            background-color: #f8f9fa;
+            border: 2px solid #0d6efd;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .info-section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #0d6efd;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #0d6efd;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            margin-bottom: 8px;
+            display: flex;
+        }
+        .info-label {
+            font-weight: bold;
+            min-width: 150px;
+            color: #495057;
+        }
+        .info-value {
+            color: #333;
+        }
+        .message-content {
+            background-color: #e9ecef;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        .actions {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        .action-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .action-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0d6efd;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+        .priority-high {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo">📊 Konseil</div>
+            <div class="title">🚨 Nouveau Prospect</div>
+        </div>
+        
+        <div class="alert">
+            <strong>⚠️ Action requise :</strong> Un nouveau prospect a soumis une demande de contact sur le site web.
+        </div>
+        
+        <div class="prospect-info">
+            <div class="info-section">
+                <div class="section-title">📋 Informations du Prospect</div>
+                <div class="info-row">
+                    <span class="info-label">Nom complet :</span>
+                    <span class="info-value">{{ contact.nom }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email :</span>
+                    <span class="info-value">{{ contact.email }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Téléphone :</span>
+                    <span class="info-value">{{ contact.telephone }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Entreprise :</span>
+                    <span class="info-value">{{ contact.entreprise }}</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="section-title">🎯 Demande</div>
+                <div class="info-row">
+                    <span class="info-label">Service demandé :</span>
+                    <span class="info-value"><strong>{{ contact.service }}</strong></span>
+                </div>
+                {% if contact.date_rendez_vous %}
+                <div class="info-row">
+                    <span class="info-label">Rendez-vous souhaité :</span>
+                    <span class="info-value"><strong>{{ contact.date_rendez_vous.strftime('%d/%m/%Y à %H:%M') }}</strong></span>
+                </div>
+                <div class="priority-high">
+                    <strong>⚠️ Rendez-vous demandé !</strong> Ce prospect souhaite un rendez-vous spécifique.
+                </div>
+                {% endif %}
+                <div class="info-row">
+                    <span class="info-label">Date de contact :</span>
+                    <span class="info-value">{{ contact.date_contact.strftime('%d/%m/%Y à %H:%M') }}</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="section-title">💬 Message du Prospect</div>
+                <div class="message-content">
+                    {{ contact.message }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <div class="section-title">📞 Actions Recommandées</div>
+            <div class="action-item">
+                <strong>Contacter le prospect</strong> dans les 24h pour confirmer l'intérêt
+            </div>
+            <div class="action-item">
+                <strong>Préparer une proposition</strong> adaptée au service demandé
+            </div>
+            {% if contact.date_rendez_vous %}
+            <div class="action-item">
+                <strong>Vérifier la disponibilité</strong> pour le rendez-vous demandé
+            </div>
+            {% endif %}
+            <div class="action-item">
+                <strong>Ajouter le prospect</strong> à votre CRM pour le suivi
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Cet email a été généré automatiquement suite à une nouvelle demande de contact.</p>
+            <p>Cabinet Konseil - Système de notification automatique</p>
+        </div>
+    </div>
+</body>
+</html> 
