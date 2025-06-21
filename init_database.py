@@ -6,246 +6,201 @@ Ajoute des données d'exemple pour les articles et contacts
 Compatible avec Render et PostgreSQL
 """
 
-from app import app, db, Article, Contact
-from datetime import datetime, timedelta
-import os
+from app import app, db, Contact, Article
+from datetime import datetime
 
 def init_database():
-    """Initialise la base de données avec des données d'exemple"""
-    
     with app.app_context():
-        # Créer les tables
+        # Supprimer toutes les tables existantes
+        db.drop_all()
+        
+        # Créer toutes les tables
         db.create_all()
         
-        # Vérifier si des données existent déjà
-        if Article.query.first():
-            print("⚠️  Des articles existent déjà dans la base de données.")
-            return
+        # Ajouter des contacts d'exemple
+        contacts = [
+            Contact(
+                nom="Jean Dupont",
+                email="jean.dupont@entreprise.com",
+                telephone="+590 590 12 34 56",
+                entreprise="Entreprise Antillaise SARL",
+                service="Conseil en Stratégie",
+                message="Bonjour, nous souhaitons développer une stratégie digitale pour notre entreprise. Pouvez-vous nous accompagner ?",
+                date_contact=datetime.now(),
+                statut="nouveau"
+            ),
+            Contact(
+                nom="Marie Martin",
+                email="marie.martin@startup.fr",
+                telephone="+590 590 98 76 54",
+                entreprise="Startup Innovation",
+                service="Création Digitale",
+                message="Nous avons besoin d'un site web moderne pour notre startup. Avez-vous des créneaux disponibles ?",
+                date_contact=datetime.now(),
+                statut="nouveau"
+            ),
+            Contact(
+                nom="Pierre Durand",
+                email="pierre.durand@commerce.com",
+                telephone="+590 590 11 22 33",
+                entreprise="Commerce Local",
+                service="Adoption IA",
+                message="Intéressé par l'automatisation de notre service client avec l'IA. Pouvez-vous nous expliquer les possibilités ?",
+                date_contact=datetime.now(),
+                statut="nouveau"
+            )
+        ]
         
-        print("🚀 Initialisation de la base de données Konseil...")
+        for contact in contacts:
+            db.session.add(contact)
         
-        # Articles d'exemple
-        articles_data = [
-            {
-                'titre': 'L\'économie numérique aux Antilles : opportunités et défis',
-                'categorie': 'Economie',
-                'image': 'https://via.placeholder.com/800x400/007bff/ffffff?text=Economie+Numerique+Antilles',
-                'resume': 'Découvrez les opportunités et défis de la transformation digitale pour les entreprises antillaises dans un contexte économique en pleine évolution.',
-                'contenu': '''
-                <h2>Introduction</h2>
-                <p>L'économie numérique représente une opportunité majeure pour les Antilles françaises. Dans un contexte de mondialisation et de digitalisation accélérée, les entreprises locales doivent s'adapter pour rester compétitives.</p>
+        # Ajouter des articles d'exemple
+        articles = [
+            Article(
+                titre="La transformation digitale aux Antilles : enjeux et opportunités",
+                contenu="""
+                <p>La transformation digitale représente un défi majeur pour les entreprises antillaises. 
+                Dans un contexte insulaire, les enjeux sont multiples : connectivité, formation, adaptation 
+                des processus...</p>
                 
-                <h3>Les enjeux de la transformation digitale</h3>
-                <p>La transformation digitale aux Antilles présente des défis spécifiques :</p>
+                <h3>Les défis spécifiques aux Antilles</h3>
+                <p>Les entreprises antillaises font face à des défis uniques :</p>
                 <ul>
-                    <li>Infrastructure numérique à développer</li>
-                    <li>Formation des compétences digitales</li>
-                    <li>Adaptation aux nouvelles technologies</li>
-                    <li>Intégration dans l'écosystème numérique régional</li>
+                    <li>Connectivité internet parfois limitée</li>
+                    <li>Formation des équipes aux nouvelles technologies</li>
+                    <li>Adaptation des processus aux spécificités locales</li>
+                    <li>Gestion des contraintes logistiques insulaires</li>
                 </ul>
                 
-                <h3>Opportunités pour les entreprises</h3>
-                <p>Les entreprises antillaises peuvent bénéficier de :</p>
+                <h3>Les opportunités</h3>
+                <p>Malgré ces défis, les opportunités sont nombreuses :</p>
                 <ul>
-                    <li>Nouveaux marchés accessibles via le digital</li>
-                    <li>Optimisation des processus internes</li>
-                    <li>Amélioration de la relation client</li>
-                    <li>Réduction des coûts opérationnels</li>
+                    <li>Marché en forte croissance</li>
+                    <li>Besoin d'innovation dans tous les secteurs</li>
+                    <li>Potentiel d'export vers la Caraïbe</li>
+                    <li>Développement de l'économie numérique</li>
                 </ul>
                 
-                <h3>Conclusion</h3>
-                <p>L'adoption des technologies numériques est essentielle pour la compétitivité des entreprises antillaises. Un accompagnement spécialisé peut faciliter cette transition.</p>
-                '''
-            },
-            {
-                'titre': 'L\'IA au service des PME : guide pratique',
-                'categorie': 'Technologie',
-                'image': 'https://via.placeholder.com/800x400/28a745/ffffff?text=IA+PME+Guide',
-                'resume': 'Comment l\'intelligence artificielle peut transformer les petites et moyennes entreprises et améliorer leur productivité.',
-                'contenu': '''
-                <h2>Qu'est-ce que l'IA pour les PME ?</h2>
-                <p>L'intelligence artificielle n'est plus réservée aux grandes entreprises. Les PME peuvent aujourd'hui bénéficier de solutions IA accessibles et adaptées à leurs besoins.</p>
+                <p>Chez Konseil, nous accompagnons les entreprises antillaises dans cette transformation 
+                en tenant compte des spécificités locales et en proposant des solutions adaptées.</p>
+                """,
+                categorie="Transformation Digitale",
+                date_publication=datetime.now(),
+                auteur="Équipe Konseil",
+                image_url="https://via.placeholder.com/800x400/0d6efd/ffffff?text=Transformation+Digitale"
+            ),
+            Article(
+                titre="L'intelligence artificielle : un levier de croissance pour les PME",
+                contenu="""
+                <p>L'intelligence artificielle n'est plus réservée aux grandes entreprises. 
+                Les PME peuvent également en bénéficier pour optimiser leurs processus et 
+                améliorer leur compétitivité.</p>
                 
-                <h3>Applications concrètes</h3>
-                <p>Voici quelques applications pratiques de l'IA pour les PME :</p>
-                <ul>
-                    <li><strong>Automatisation des tâches répétitives :</strong> Traitement de factures, gestion des emails</li>
-                    <li><strong>Service client intelligent :</strong> Chatbots pour répondre aux questions fréquentes</li>
-                    <li><strong>Analyse prédictive :</strong> Anticipation des tendances de vente</li>
-                    <li><strong>Optimisation des processus :</strong> Amélioration de l'efficacité opérationnelle</li>
-                </ul>
+                <h3>Applications concrètes pour les PME</h3>
+                <p>Voici quelques applications pratiques de l'IA pour les petites et moyennes entreprises :</p>
                 
-                <h3>Mise en œuvre étape par étape</h3>
+                <h4>1. Service client automatisé</h4>
+                <p>Les chatbots intelligents peuvent gérer les demandes récurrentes, 
+                libérant du temps pour les équipes commerciales.</p>
+                
+                <h4>2. Analyse prédictive</h4>
+                <p>L'IA peut analyser les données clients pour prédire les tendances 
+                et optimiser les stocks.</p>
+                
+                <h4>3. Automatisation des tâches répétitives</h4>
+                <p>De nombreuses tâches administratives peuvent être automatisées 
+                grâce à l'IA.</p>
+                
+                <h3>Comment commencer ?</h3>
+                <p>La mise en place de l'IA doit être progressive :</p>
                 <ol>
-                    <li>Identifier les processus à automatiser</li>
-                    <li>Choisir les outils IA appropriés</li>
+                    <li>Identifier les processus les plus adaptés</li>
                     <li>Former les équipes</li>
-                    <li>Implémenter progressivement</li>
-                    <li>Mesurer et optimiser</li>
+                    <li>Commencer par des projets pilotes</li>
+                    <li>Étendre progressivement</li>
                 </ol>
                 
-                <h3>Bénéfices attendus</h3>
-                <p>L'adoption de l'IA peut apporter :</p>
-                <ul>
-                    <li>Réduction de 30% des coûts opérationnels</li>
-                    <li>Amélioration de 40% de la productivité</li>
-                    <li>Meilleure satisfaction client</li>
-                    <li>Avantage concurrentiel</li>
-                </ul>
-                '''
-            },
-            {
-                'titre': 'Tech verte aux Antilles : solutions durables',
-                'categorie': 'Environnement',
-                'image': 'https://via.placeholder.com/800x400/ffc107/000000?text=Tech+Verte+Antilles',
-                'resume': 'Les solutions technologiques pour un développement durable dans les Caraïbes et leur impact sur l\'environnement local.',
-                'contenu': '''
-                <h2>Développement durable aux Antilles</h2>
-                <p>Les Antilles font face à des défis environnementaux uniques. La technologie verte offre des solutions innovantes pour un développement durable.</p>
+                <p>Notre équipe d'experts vous accompagne dans cette démarche 
+                d'adoption de l'IA.</p>
+                """,
+                categorie="Intelligence Artificielle",
+                date_publication=datetime.now(),
+                auteur="Expert IA Konseil",
+                image_url="https://via.placeholder.com/800x400/28a745/ffffff?text=Intelligence+Artificielle"
+            ),
+            Article(
+                titre="Stratégie digitale : les 5 étapes clés pour réussir",
+                contenu="""
+                <p>Une stratégie digitale réussie nécessite une approche structurée 
+                et méthodique. Voici les 5 étapes essentielles pour transformer 
+                votre entreprise.</p>
                 
-                <h3>Enjeux environnementaux locaux</h3>
-                <p>Les principaux défis environnementaux aux Antilles :</p>
+                <h3>Étape 1 : Audit et diagnostic</h3>
+                <p>Commencer par un audit complet de votre situation actuelle :</p>
                 <ul>
-                    <li>Gestion des déchets et recyclage</li>
-                    <li>Énergies renouvelables</li>
-                    <li>Protection de la biodiversité marine</li>
-                    <li>Adaptation au changement climatique</li>
+                    <li>Analyse de votre présence en ligne</li>
+                    <li>Évaluation de vos processus internes</li>
+                    <li>Étude de votre concurrence</li>
+                    <li>Identification des opportunités</li>
                 </ul>
                 
-                <h3>Solutions technologiques vertes</h3>
-                <h4>Énergies renouvelables</h4>
-                <p>L'énergie solaire et éolienne sont particulièrement adaptées au climat antillais :</p>
+                <h3>Étape 2 : Définition des objectifs</h3>
+                <p>Fixer des objectifs SMART (Spécifiques, Mesurables, Atteignables, 
+                Réalistes, Temporels) :</p>
                 <ul>
-                    <li>Panneaux solaires intelligents</li>
-                    <li>Systèmes de stockage d'énergie</li>
-                    <li>Gestion intelligente de la consommation</li>
+                    <li>Augmentation du chiffre d'affaires</li>
+                    <li>Amélioration de l'expérience client</li>
+                    <li>Optimisation des processus</li>
+                    <li>Réduction des coûts</li>
                 </ul>
                 
-                <h4>Gestion intelligente des ressources</h4>
-                <p>Technologies pour optimiser l'utilisation des ressources :</p>
+                <h3>Étape 3 : Élaboration de la stratégie</h3>
+                <p>Développer une stratégie cohérente avec vos objectifs :</p>
                 <ul>
-                    <li>Capteurs IoT pour le monitoring environnemental</li>
-                    <li>Systèmes de gestion d'eau intelligents</li>
-                    <li>Optimisation des chaînes logistiques</li>
-                </ul>
-                
-                <h3>Impact économique</h3>
-                <p>L'adoption de technologies vertes peut :</p>
-                <ul>
-                    <li>Créer de nouveaux emplois</li>
-                    <li>Réduire les coûts énergétiques</li>
-                    <li>Attirer des investissements durables</li>
-                    <li>Améliorer l'image de marque des entreprises</li>
-                </ul>
-                
-                <h3>Conclusion</h3>
-                <p>La technologie verte représente une opportunité unique pour les Antilles de concilier développement économique et protection environnementale.</p>
-                '''
-            },
-            {
-                'titre': 'Transformation digitale : guide pour les entreprises antillaises',
-                'categorie': 'Economie',
-                'image': 'https://via.placeholder.com/800x400/dc3545/ffffff?text=Transformation+Digitale',
-                'resume': 'Un guide complet pour accompagner les entreprises antillaises dans leur transformation digitale et leur adaptation aux nouvelles technologies.',
-                'contenu': '''
-                <h2>Pourquoi se digitaliser ?</h2>
-                <p>La transformation digitale n'est plus une option mais une nécessité pour survivre dans l'économie moderne. Les entreprises antillaises doivent s'adapter rapidement.</p>
-                
-                <h3>Étapes de la transformation digitale</h3>
-                <h4>1. Diagnostic et audit</h4>
-                <p>Évaluer la maturité digitale actuelle de l'entreprise :</p>
-                <ul>
-                    <li>Analyse des processus existants</li>
-                    <li>Évaluation des compétences numériques</li>
-                    <li>Identification des opportunités d'amélioration</li>
-                </ul>
-                
-                <h4>2. Définition de la stratégie</h4>
-                <p>Élaborer une feuille de route claire :</p>
-                <ul>
-                    <li>Objectifs de transformation</li>
-                    <li>Priorités d'investissement</li>
+                    <li>Choix des canaux digitaux</li>
+                    <li>Définition du plan d'action</li>
+                    <li>Allocation des ressources</li>
                     <li>Planning de mise en œuvre</li>
                 </ul>
                 
-                <h4>3. Formation et accompagnement</h4>
-                <p>Préparer les équipes au changement :</p>
+                <h3>Étape 4 : Mise en œuvre</h3>
+                <p>Exécuter votre stratégie de manière progressive :</p>
                 <ul>
-                    <li>Formation aux nouveaux outils</li>
-                    <li>Accompagnement au changement</li>
-                    <li>Développement des compétences</li>
+                    <li>Développement des solutions</li>
+                    <li>Formation des équipes</li>
+                    <li>Tests et ajustements</li>
+                    <li>Déploiement</li>
                 </ul>
                 
-                <h3>Technologies clés</h3>
-                <p>Les technologies essentielles pour la transformation :</p>
+                <h3>Étape 5 : Suivi et optimisation</h3>
+                <p>Mesurer les résultats et optimiser en continu :</p>
                 <ul>
-                    <li><strong>Cloud Computing :</strong> Flexibilité et réduction des coûts</li>
-                    <li><strong>Big Data :</strong> Analyse et prise de décision</li>
-                    <li><strong>IA et Machine Learning :</strong> Automatisation intelligente</li>
-                    <li><strong>IoT :</strong> Connectivité et monitoring</li>
+                    <li>Suivi des KPIs</li>
+                    <li>Analyse des performances</li>
+                    <li>Ajustements stratégiques</li>
+                    <li>Amélioration continue</li>
                 </ul>
                 
-                <h3>Mesurer le succès</h3>
-                <p>Indicateurs de performance à suivre :</p>
-                <ul>
-                    <li>Productivité des employés</li>
-                    <li>Satisfaction client</li>
-                    <li>Réduction des coûts</li>
-                    <li>Nouveaux revenus générés</li>
-                </ul>
-                '''
-            }
+                <p>Chez Konseil, nous vous accompagnons à chaque étape de votre 
+                transformation digitale avec une approche personnalisée et adaptée 
+                au contexte antillais.</p>
+                """,
+                categorie="Stratégie",
+                date_publication=datetime.now(),
+                auteur="Consultant Stratégie Konseil",
+                image_url="https://via.placeholder.com/800x400/dc3545/ffffff?text=Stratégie+Digitale"
+            )
         ]
         
-        # Ajouter les articles
-        for article_data in articles_data:
-            article = Article(**article_data)
+        for article in articles:
             db.session.add(article)
         
-        # Messages de contact d'exemple
-        contacts_data = [
-            {
-                'nom': 'Dupont',
-                'prenom': 'Marie',
-                'email': 'marie.dupont@email.com',
-                'service': 'Création Digitale',
-                'date': datetime.now().date() + timedelta(days=7),
-                'heure': '14:00',
-                'message': 'Bonjour, je souhaite créer un site e-commerce pour ma boutique de produits locaux en Guadeloupe. Pouvez-vous me contacter pour discuter du projet ?'
-            },
-            {
-                'nom': 'Martin',
-                'prenom': 'Jean-Pierre',
-                'email': 'jp.martin@entreprise.fr',
-                'service': 'Conseil en Stratégie et Pilotage',
-                'date': datetime.now().date() + timedelta(days=3),
-                'heure': '10:00',
-                'message': 'Nous cherchons un accompagnement pour optimiser nos processus internes et améliorer notre productivité. Merci de nous recontacter.'
-            },
-            {
-                'nom': 'Rousseau',
-                'prenom': 'Sophie',
-                'email': 'sophie.rousseau@tech-antilles.com',
-                'service': 'Adoptez l\'IA',
-                'date': datetime.now().date() + timedelta(days=14),
-                'heure': '16:00',
-                'message': 'Intéressée par l\'intégration de solutions IA dans notre entreprise. Nous aimerions en savoir plus sur vos services.'
-            }
-        ]
-        
-        # Ajouter les contacts
-        for contact_data in contacts_data:
-            contact = Contact(**contact_data)
-            db.session.add(contact)
-        
-        # Sauvegarder les changements
+        # Valider toutes les modifications
         db.session.commit()
         
         print("✅ Base de données initialisée avec succès !")
-        print(f"📰 {len(articles_data)} articles créés")
-        print(f"📧 {len(contacts_data)} messages de contact créés")
-        print("\n🌴 Konseil - Cabinet de conseil aux Antilles")
-        print("📧 Contact: contact@konseil-antilles.fr")
+        print(f"📊 {len(contacts)} contacts d'exemple ajoutés")
+        print(f"📝 {len(articles)} articles d'exemple ajoutés")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_database() 
