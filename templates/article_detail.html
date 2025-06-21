@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.titre }} - Konseil{% endblock %}
+
+{% block content %}
+<!-- Article Header -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ url_for('articles') }}" class="text-white">
+                                <i class="fas fa-newspaper me-1"></i>Articles
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ url_for('articles') }}?categorie={{ article.categorie }}" class="text-white">
+                                {{ article.categorie }}
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">
+                            {{ article.titre[:30] }}...
+                        </li>
+                    </ol>
+                </nav>
+                
+                <div class="text-center">
+                    <span class="badge bg-light text-primary mb-3">{{ article.categorie }}</span>
+                    <h1 class="display-5 fw-bold mb-3">{{ article.titre }}</h1>
+                    <p class="lead mb-0">
+                        <i class="fas fa-calendar me-2"></i>
+                        Publié le {{ article.date_creation.strftime('%d/%m/%Y') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Article Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Image de l'article -->
+                {% if article.image %}
+                <div class="mb-4">
+                    <img src="{{ article.image }}" alt="{{ article.titre }}" class="img-fluid rounded shadow">
+                </div>
+                {% endif %}
+                
+                <!-- Résumé -->
+                <div class="card border-0 bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-2">
+                            <i class="fas fa-info-circle text-primary me-2"></i>Résumé
+                        </h5>
+                        <p class="mb-0">{{ article.resume }}</p>
+                    </div>
+                </div>
+                
+                <!-- Contenu de l'article -->
+                <div class="article-content">
+                    {{ article.contenu | safe }}
+                </div>
+                
+                <!-- Partage social -->
+                <div class="card border-0 shadow-sm mt-5">
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-3">
+                            <i class="fas fa-share-alt me-2 text-primary"></i>Partagez cet article
+                        </h6>
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fab fa-linkedin me-2"></i>LinkedIn
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fab fa-twitter me-2"></i>Twitter
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fab fa-facebook me-2"></i>Facebook
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Articles similaires -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-6 fw-bold mb-3">Articles similaires</h2>
+            <p class="lead text-muted">Découvrez d'autres articles qui pourraient vous intéresser</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Article similaire 1 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-newspaper text-muted" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Économie</span>
+                        <h5 class="card-title fw-bold">L'économie numérique aux Antilles</h5>
+                        <p class="card-text text-muted">
+                            Découvrez les opportunités et défis de la transformation digitale 
+                            pour les entreprises antillaises...
+                        </p>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Lire la suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article similaire 2 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-newspaper text-muted" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Technologie</span>
+                        <h5 class="card-title fw-bold">L'IA au service des PME</h5>
+                        <p class="card-text text-muted">
+                            Comment l'intelligence artificielle peut transformer 
+                            les petites et moyennes entreprises...
+                        </p>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Lire la suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Article similaire 3 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-newspaper text-muted" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-warning mb-2">Environnement</span>
+                        <h5 class="card-title fw-bold">Tech verte aux Antilles</h5>
+                        <p class="card-text text-muted">
+                            Les solutions technologiques pour un développement 
+                            durable dans les Caraïbes...
+                        </p>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Lire la suite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-6 fw-bold mb-4">Besoin d'expertise ?</h2>
+        <p class="lead mb-4">
+            Nos consultants sont là pour vous accompagner dans vos projets de transformation digitale.
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">
+            <i class="fas fa-envelope me-2"></i>Demander un devis gratuit
+        </a>
+    </div>
+</section>
+{% endblock %} 

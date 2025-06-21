@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}Nos Services - Konseil{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-3">Nos Services</h1>
+            <p class="lead">Des solutions complètes pour votre transformation digitale aux Antilles</p>
+        </div>
+    </div>
+</section>
+
+<!-- Services Detail Section -->
+<section class="py-5">
+    <div class="container">
+        <!-- Service 1: Conseil en Stratégie -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <div class="service-detail">
+                    <div class="service-icon-large mb-4">
+                        <i class="fas fa-chess text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="display-6 fw-bold mb-4">Conseil en Stratégie et Pilotage</h2>
+                    <p class="lead mb-4">
+                        Alignez vos projets avec des solutions d'optimisation et de pilotage efficaces.
+                    </p>
+                    <p class="mb-4">
+                        Notre expertise en conseil stratégique vous accompagne dans la définition et la mise en œuvre 
+                        de votre vision d'entreprise. Nous analysons votre environnement concurrentiel, identifions 
+                        vos opportunités de croissance et élaborons des plans d'action concrets.
+                    </p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Analyse stratégique</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Optimisation des processus</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Pilotage de projets</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Formation des équipes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Demander un devis
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/600x400/007bff/ffffff?text=Stratégie+%26+Pilotage" 
+                     alt="Conseil en Stratégie" class="img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Service 2: Création Digitale -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 order-lg-2">
+                <div class="service-detail">
+                    <div class="service-icon-large mb-4">
+                        <i class="fas fa-laptop-code text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="display-6 fw-bold mb-4">Création Digitale</h2>
+                    <p class="lead mb-4">
+                        Sites vitrines, e-commerce et applications mobiles personnalisées.
+                    </p>
+                    <p class="mb-4">
+                        Nous créons des solutions digitales sur mesure qui reflètent l'identité de votre marque 
+                        et répondent aux besoins spécifiques de votre marché antillais. De la conception à la 
+                        mise en ligne, nous assurons un accompagnement complet.
+                    </p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Sites web responsives</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>E-commerce</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Applications mobiles</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Maintenance & support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Demander un devis
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <img src="https://via.placeholder.com/600x400/28a745/ffffff?text=Création+Digitale" 
+                     alt="Création Digitale" class="img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Service 3: Adoptez l'IA -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <div class="service-detail">
+                    <div class="service-icon-large mb-4">
+                        <i class="fas fa-robot text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="display-6 fw-bold mb-4">Adoptez l'IA</h2>
+                    <p class="lead mb-4">
+                        Automatisez, gagnez du temps et réduisez vos dépenses grâce à l'IA.
+                    </p>
+                    <p class="mb-4">
+                        L'intelligence artificielle révolutionne la façon dont les entreprises opèrent. 
+                        Nous vous accompagnons dans l'intégration de solutions IA adaptées à votre secteur 
+                        d'activité pour optimiser vos processus et améliorer votre productivité.
+                    </p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Automatisation des tâches</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Chatbots intelligents</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Optimisation IA</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Formation IA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Demander un devis
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/600x400/dc3545/ffffff?text=Intelligence+Artificielle" 
+                     alt="Adoptez l'IA" class="img-fluid rounded shadow">
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Service 4: Analyse de Données -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 order-lg-2">
+                <div class="service-detail">
+                    <div class="service-icon-large mb-4">
+                        <i class="fas fa-chart-bar text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="display-6 fw-bold mb-4">Analyse de Données</h2>
+                    <p class="lead mb-4">
+                        Des dashboards interactifs pour suivre vos performances et analyser le comportement client.
+                    </p>
+                    <p class="mb-4">
+                        Transformez vos données en insights actionnables. Nos solutions d'analyse vous permettent 
+                        de comprendre vos clients, optimiser vos performances et prendre des décisions éclairées 
+                        basées sur des données concrètes.
+                    </p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Dashboards interactifs</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Analyse comportementale</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Prédictions</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Rapports automatisés</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Demander un devis
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <img src="https://via.placeholder.com/600x400/ffc107/000000?text=Analyse+de+Données" 
+                     alt="Analyse de Données" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Notre Méthode</h2>
+            <p class="lead text-muted">Une approche structurée pour garantir votre succès</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="process-step mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">1</span>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold">Diagnostic</h5>
+                    <p class="text-muted">Analyse approfondie de vos besoins et objectifs</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="process-step mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">2</span>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold">Stratégie</h5>
+                    <p class="text-muted">Élaboration d'une solution personnalisée</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="process-step mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">3</span>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold">Implémentation</h5>
+                    <p class="text-muted">Mise en œuvre et développement de la solution</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="process-step mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">4</span>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold">Suivi</h5>
+                    <p class="text-muted">Accompagnement et optimisation continue</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-6 fw-bold mb-4">Prêt à commencer votre projet ?</h2>
+        <p class="lead mb-4">
+            Contactez-nous pour discuter de vos besoins et obtenir un accompagnement personnalisé.
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">
+            <i class="fas fa-envelope me-2"></i>Demander un devis gratuit
+        </a>
+    </div>
+</section>
+{% endblock %} 

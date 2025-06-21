@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - Konseil{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold mb-3">Contactez-nous</h1>
+            <p class="lead">Discutons de votre projet et trouvons ensemble la meilleure solution</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Formulaire de contact -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="fw-bold mb-4">
+                            <i class="fas fa-envelope me-3 text-primary"></i>Demandez un devis
+                        </h2>
+                        
+                        <form method="POST" action="{{ url_for('contact') }}">
+                            <div class="row g-3">
+                                <!-- Nom et Prénom -->
+                                <div class="col-md-6">
+                                    <label for="nom" class="form-label fw-bold">
+                                        <i class="fas fa-user me-2"></i>Nom *
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg" id="nom" name="nom" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="prenom" class="form-label fw-bold">
+                                        <i class="fas fa-user me-2"></i>Prénom *
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg" id="prenom" name="prenom" required>
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="col-12">
+                                    <label for="email" class="form-label fw-bold">
+                                        <i class="fas fa-envelope me-2"></i>Email *
+                                    </label>
+                                    <input type="email" class="form-control form-control-lg" id="email" name="email" required>
+                                </div>
+                                
+                                <!-- Service -->
+                                <div class="col-12">
+                                    <label for="service" class="form-label fw-bold">
+                                        <i class="fas fa-cogs me-2"></i>Service souhaité *
+                                    </label>
+                                    <select class="form-select form-select-lg" id="service" name="service" required>
+                                        <option value="">Choisissez un service</option>
+                                        <option value="Conseil en Stratégie et Pilotage">Conseil en Stratégie et Pilotage</option>
+                                        <option value="Création Digitale">Création Digitale</option>
+                                        <option value="Adoptez l'IA">Adoptez l'IA</option>
+                                        <option value="Analyse de Données">Analyse de Données</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Date et Heure -->
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label fw-bold">
+                                        <i class="fas fa-calendar me-2"></i>Date souhaitée *
+                                    </label>
+                                    <input type="date" class="form-control form-control-lg" id="date" name="date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="heure" class="form-label fw-bold">
+                                        <i class="fas fa-clock me-2"></i>Heure préférée *
+                                    </label>
+                                    <select class="form-select form-select-lg" id="heure" name="heure" required>
+                                        <option value="">Choisissez une heure</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Message -->
+                                <div class="col-12">
+                                    <label for="message" class="form-label fw-bold">
+                                        <i class="fas fa-comment me-2"></i>Message (optionnel)
+                                    </label>
+                                    <textarea class="form-control form-control-lg" id="message" name="message" rows="5" 
+                                              placeholder="Décrivez votre projet, vos besoins ou posez vos questions..."></textarea>
+                                </div>
+                                
+                                <!-- Bouton d'envoi -->
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>Envoyer ma demande
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Informations de contact -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>Nos Coordonnées
+                        </h3>
+                        
+                        <!-- Localisation -->
+                        <div class="contact-info mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-map-marker-alt text-primary me-3 mt-1" style="font-size: 1.2rem;"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Nos bureaux</h6>
+                                    <p class="mb-1">Guadeloupe • Martinique</p>
+                                    <small class="text-muted">Présence sur les deux îles</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="contact-info mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-envelope text-primary me-3 mt-1" style="font-size: 1.2rem;"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Email</h6>
+                                    <p class="mb-1">contact@konseil-antilles.fr</p>
+                                    <small class="text-muted">Réponse sous 24h</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Téléphone -->
+                        <div class="contact-info mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-phone text-primary me-3 mt-1" style="font-size: 1.2rem;"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Téléphone</h6>
+                                    <p class="mb-1">+590 590 XX XX XX</p>
+                                    <small class="text-muted">Lun-Ven 9h-18h</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Horaires -->
+                        <div class="contact-info mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="fas fa-clock text-primary me-3 mt-1" style="font-size: 1.2rem;"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Horaires</h6>
+                                    <p class="mb-1">Lundi - Vendredi</p>
+                                    <small class="text-muted">9h00 - 18h00 (GMT-4)</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Réseaux sociaux -->
+                        <div class="contact-info">
+                            <h6 class="fw-bold mb-3">
+                                <i class="fas fa-share-alt me-2 text-primary"></i>Suivez-nous
+                            </h6>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Questions Fréquentes</h2>
+            <p class="lead text-muted">Trouvez rapidement des réponses à vos questions</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Combien de temps dure un projet ?
+                        </h5>
+                        <p class="text-muted">
+                            La durée varie selon la complexité du projet. Un site vitrine prend généralement 
+                            2-4 semaines, tandis qu'une application complète peut nécessiter 2-3 mois.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Proposez-vous un accompagnement post-lancement ?
+                        </h5>
+                        <p class="text-muted">
+                            Oui, nous proposons des contrats de maintenance et d'accompagnement 
+                            pour assurer le bon fonctionnement de vos solutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Travaillez-vous avec des entreprises de toutes tailles ?
+                        </h5>
+                        <p class="text-muted">
+                            Absolument ! Nous accompagnons des startups, PME et grandes entreprises 
+                            dans leur transformation digitale aux Antilles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-question-circle text-primary me-2"></i>
+                            Les devis sont-ils gratuits ?
+                        </h5>
+                        <p class="text-muted">
+                            Oui, nous proposons des devis gratuits et sans engagement. 
+                            Contactez-nous pour discuter de votre projet !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
